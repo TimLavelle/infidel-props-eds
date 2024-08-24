@@ -227,6 +227,20 @@
         "label": "Description",
         "valueType": "string"
       }
-    ]
+    ],
+    "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "Card",
+            "value": "card"
+          },
+          {
+            "name": "Banner",
+            "value": "banner"
+          }
+        ]
   }
 ]
