@@ -1,0 +1,7 @@
+sitemaps:
+   infidel-props:
+     source: /query-index.json
+     destination: /sitemap-en.xml
+     hreflang: en
+     lastmod: YYYY-MM-DD
+     x-default-url: /index.html

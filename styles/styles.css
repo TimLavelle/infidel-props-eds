@@ -224,3 +224,8 @@ main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
 }
+
+/* Columns */
+.columns > div {
+  align-items: flex-start !important;
+}

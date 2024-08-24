@@ -1,4 +1,4 @@
-export default function decorate(block) {
+export default async function decorate(block) {
   //   const [bg, fg] = block.children;
   const props = [...block.children];
   const mediaBlock = props[0];
