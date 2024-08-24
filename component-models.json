@@ -226,9 +226,14 @@
         "value": "",
         "label": "Description",
         "valueType": "string"
-      }
-    ],
-    "options": [
+      },
+      {
+        "component": "select",
+        "name": "class",
+        "value": "",
+        "label": "Class",
+        "valueType": "string",
+        "options": [
           {
             "name": "default",
             "value": ""
@@ -242,5 +247,7 @@
             "value": "banner"
           }
         ]
+      }
+    ]
   }
 ]
