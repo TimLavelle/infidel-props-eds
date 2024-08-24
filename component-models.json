@@ -208,6 +208,18 @@
         "required": true
       },
       {
+        "component": "select",
+        "name": "foreground_titleType",
+        "value": "h3",
+        "label": "Title Type",
+        "valueType": "string",
+        "options": [
+          {"name": "H2", "value": "h2"},
+          {"name": "H3", "value": "h3"},
+          {"name": "H4", "value": "h4"}
+        ]
+      },
+      {
         "component": "boolean",
         "label": "Add a Teaser image?",
         "name": "showTeaserImage",
@@ -230,18 +242,6 @@
         "valueType": "string",
         "required": true,
         "condition": { "===": [{"var" : "showTeaserImage"}, true] }
-      },
-      {
-        "component": "select",
-        "name": "foreground_titleType",
-        "value": "h3",
-        "label": "Title Type",
-        "valueType": "string",
-        "options": [
-          {"name": "H2", "value": "h2"},
-          {"name": "H3", "value": "h3"},
-          {"name": "H4", "value": "h4"}
-        ]
       },
       {
         "component": "text",
