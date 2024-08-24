@@ -197,13 +197,34 @@
     ]
   },
   {
-    "id": "Teaser",
+    "id": "teaser",
     "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
       {
         "component": "text",
         "name": "pretitle",
-        "value": "Add your teaser title",
-        "label": "Teaser Title",
+        "value": "",
+        "label": "Pretitle",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "value": "",
+        "label": "Description",
         "valueType": "string"
       }
     ]
