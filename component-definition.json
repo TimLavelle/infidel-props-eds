@@ -160,7 +160,9 @@
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
                   "name": "Teaser",
-                  "model": "teaser"
+                  "model": "teaser",
+                  "foreground_title": "Add your Teaser content",
+                  "foreground_titleType": "h3"
                 }
               }
             }
