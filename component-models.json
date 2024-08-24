@@ -200,11 +200,26 @@
     "id": "teaser",
     "fields": [
       {
+        "component": "text",
+        "name": "foreground_title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "boolean",
+        "label": "Add a Teaser image?",
+        "name": "showTeaserImage",
+        "valueType": "boolean"
+      },
+      {
         "component": "reference",
         "valueType": "string",
         "name": "background_image",
         "label": "Image",
-        "multi": false
+        "multi": false,
+        "condition": { "===": [{"var" : "showTeaserImage"}, true] }
       },
       {
         "component": "text",
@@ -212,14 +227,9 @@
         "value": "",
         "label": "Image Alt",
         "description": "Alternative text for Accessibiliy Screen readers",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "foreground_title",
-        "value": "",
-        "label": "Title",
-        "valueType": "string"
+        "valueType": "string",
+        "required": true,
+        "condition": { "===": [{"var" : "showTeaserImage"}, true] }
       },
       {
         "component": "select",
@@ -245,7 +255,8 @@
         "name": "foreground_description",
         "value": "",
         "label": "Description",
-        "valueType": "string"
+        "valueType": "string",
+        "required": true
       },
       {
         "component": "select",
