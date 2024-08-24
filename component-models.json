@@ -200,26 +200,12 @@
     "id": "teaser",
     "fields": [
       {
-        "component": "reference",
-        "valueType": "string",
-        "name": "background_image",
-        "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "background_imageAlt",
-        "value": "",
-        "label": "Image Alt",
-        "description": "Alternative text for Accessibiliy Screen readers",
-        "valueType": "string"
-      },
-      {
         "component": "text",
         "name": "foreground_title",
         "value": "",
         "label": "Title",
-        "valueType": "string"
+        "valueType": "string",
+        "required": true
       },
       {
         "component": "select",
@@ -234,6 +220,30 @@
         ]
       },
       {
+        "component": "boolean",
+        "label": "Add a Teaser image?",
+        "name": "showTeaserImage",
+        "valueType": "boolean"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "background_image",
+        "label": "Image",
+        "multi": false,
+        "condition": { "===": [{"var" : "showTeaserImage"}, true] }
+      },
+      {
+        "component": "text",
+        "name": "background_imageAlt",
+        "value": "",
+        "label": "Image Alt",
+        "description": "Alternative text for Accessibiliy Screen readers",
+        "valueType": "string",
+        "required": true,
+        "condition": { "===": [{"var" : "showTeaserImage"}, true] }
+      },
+      {
         "component": "text",
         "name": "foreground_pretitle",
         "value": "",
@@ -245,7 +255,8 @@
         "name": "foreground_description",
         "value": "",
         "label": "Description",
-        "valueType": "string"
+        "valueType": "string",
+        "required": true
       },
       {
         "component": "select",
