@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p129052-e1259931.adobeaemcloud.com/bin/franklin.delivery/timlavelle/infidel-props/main"
+    url: "https://author-p129052-e1259931.adobeaemcloud.com/bin/franklin.delivery/timlavelle/infidel-props-eds/main"
     type: "markup"
     suffix: ".html"
