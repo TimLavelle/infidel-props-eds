@@ -1,6 +1,3 @@
 {
-  "extends": ["stylelint-config-standard"],
-  "plugins": [
-      "xwalk"
-  ]
+  "extends": ["stylelint-config-standard"]
 }
