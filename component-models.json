@@ -221,13 +221,6 @@
         "valueType": "string"
       },
       {
-        "component": "text",
-        "name": "style",
-        "value": "",
-        "label": "Style",
-        "valueType": "string"
-      },
-      {
         "component": "richtext",
         "name": "description",
         "value": "",
