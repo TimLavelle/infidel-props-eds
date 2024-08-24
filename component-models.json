@@ -211,6 +211,7 @@
         "name": "background_imageAlt",
         "value": "",
         "label": "Image Alt",
+        "description": "Alternative text for Accessibiliy Screen readers",
         "valueType": "string"
       },
       {
