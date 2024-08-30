@@ -8,7 +8,7 @@ export default async function decorate(block) {
     textBlock: { className: 'teaser-body' }
   };
 
-  console.log(childElements);
+  console.log(block);
   
   Object.entries(childElements).forEach(([key, { className }], index) => {
     const element = block.children[index];
