@@ -16,5 +16,5 @@ export default async function decorate(block) {
     }
   });
 
-  hasImageBlock.remove();
+  console.log(childElements.hasImageBlock);
 }
