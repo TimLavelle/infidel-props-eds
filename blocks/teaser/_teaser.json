@@ -82,7 +82,6 @@
         {
           "component": "multiselect",
           "name": "classes",
-          "value": "",
           "label": "Styles",
           "valueType": "string",
           "options": [

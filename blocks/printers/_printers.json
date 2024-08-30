@@ -1,0 +1,33 @@
+{
+    "definitions": [
+        {
+            "title": "Printers",
+            "id": "printers",
+            "plugins": {
+                "xwalk": {
+                    "page": {
+                        "resourceType": "core/franklin/components/block/v1/block",
+                        "template": {
+                            "name": "Printers",
+                            "model": "printers"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "models": [
+        {
+            "id": "printers",
+            "fields": [
+                {
+                    "component": "text",
+                    "name": "title",
+                    "label": "Title",
+                    "value": "",
+                    "valueType": "string"
+                }
+            ]
+        }
+    ]
+}
