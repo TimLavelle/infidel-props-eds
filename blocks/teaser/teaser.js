@@ -6,7 +6,7 @@ export default async function decorate(block) {
     mediaBlock: { className: 'teaser-image' },
     preTitleTextBlock: { className: 'teaser-pre-title' },
     textBlock: { className: 'teaser-body' },
-    blockClasses: { className: textContent.trim() }
+    blockClasses
   };
 
   console.log(blockClasses);
