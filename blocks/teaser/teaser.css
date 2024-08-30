@@ -1,4 +1,4 @@
-.main .teaser {
+main .teaser {
     & .card {
         display: flex;
         flex-direction: column;
