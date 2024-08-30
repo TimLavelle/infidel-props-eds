@@ -13,6 +13,8 @@ export default async function decorate(block) {
     if (element) {
       element.classList.add(className);
       childElements[key].element = element;
+    } else {
+      childElements[key].element.remove();
     }
   });
 
