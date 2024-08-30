@@ -7,19 +7,17 @@ export default async function decorate(block) {
     preTitleTextBlock: { className: 'teaser-pre-title' },
     bodyBlock: { className: 'teaser-body' }
   };
-
-  console.log(block.children);
   
   Object.entries(childElements).forEach(([key, { className }], index) => {
-    const element = block.children[index];
-    if (element) {
-      element.classList.add(className);
-      childElements[key].element = element;
+    const teaserItem = block.children[index];
+    if (teaserItem) {
+      teaserItem.classList.add(className);
+      childElements[key].teaserItem = teaserItem;
     } 
   });
 
   // Get rid of the selector block to show/hide the image authoring dialogue
-  if (childElements.hasImageBlock.element) {
-    childElements.hasImageBlock.element.remove();
+  if (childElements.hasImageBlock.teaserItem) {
+    childElements.hasImageBlock.teaserItem.remove();
   }
 }
