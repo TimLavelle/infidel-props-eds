@@ -8,15 +8,17 @@ export default async function decorate(block) {
     textBlock: { className: 'teaser-body' }
   };
 
+  console.log(childElements);
+  
   Object.entries(childElements).forEach(([key, { className }], index) => {
     const element = block.children[index];
     if (element) {
-      if (!element.mediaBlock && element.textContent.trim() === '') {
-        element.remove();
-      } else {
-        element.classList.add(className);
-        childElements[key].element = element;
-      }
-    }
+      element.classList.add(className);
+      childElements[key].element = element;
+    } 
   });
+
+  if (childElements.hasImageBlock.element) {
+    childElements.hasImageBlock.element.remove();
+  }
 }
