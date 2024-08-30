@@ -184,5 +184,103 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "teaser",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "value": "Add your Teaser content",
+        "label": "Title",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "select",
+        "name": "titleType",
+        "value": "h3",
+        "label": "Title Type",
+        "valueType": "string",
+        "options": [
+          {"name": "H2", "value": "h2"},
+          {"name": "H3", "value": "h3"},
+          {"name": "H4", "value": "h4"}
+        ]
+      },
+      {
+        "component": "boolean",
+        "label": "Add a Teaser image?",
+        "name": "showTeaserImage",
+        "valueType": "boolean"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false,
+        "condition": { "===": [{"var" : "showTeaserImage"}, true] }
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "value": "",
+        "label": "Image Alt",
+        "description": "Alternative text for Accessibiliy Screen readers",
+        "valueType": "string",
+        "required": true,
+        "condition": { "===": [{"var" : "showTeaserImage"}, true] }
+      },
+      {
+        "component": "text",
+        "name": "pretitle",
+        "value": "",
+        "label": "Pretitle",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "value": "",
+        "label": "Description",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Styles",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Theme",
+            "children": [
+              {
+                "name": "Light",
+                "value": "light"
+              },
+              {
+                "name": "Dark",
+                "value": "dark"
+              }
+            ]
+          },
+          {
+            "name": "Layout",
+            "children": [
+              {
+                "name": "Card",
+                "value": "card"
+              },
+              {
+                "name": "Banner",
+                "value": "banner"
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ]
