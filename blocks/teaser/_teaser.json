@@ -117,18 +117,5 @@
       ]
     }
   ],
-  "filters": [
-    {
-      "id": "column",
-      "components": [
-        "teaser"
-      ]
-    },
-    {
-      "id": "section",
-      "components": [
-        "teaser"
-      ]
-    }
-  ]
+  "filters": []
 }
