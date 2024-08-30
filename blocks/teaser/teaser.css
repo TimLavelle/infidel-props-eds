@@ -4,7 +4,7 @@ main .teaser.card {
     border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-main .teaser.card .teaser-image { order: 1; }
-main .teaser.card .teaser-title { order: 2; }
-main .teaser.card .teaser-pre-title { order: 3; }
-main .teaser.card .teaser-body { order: 4; }
+main .teaser:is(.card, .banner) .teaser-image { order: 1; }
+main .teaser:is(.card, .banner) .teaser-title { order: 2; }
+main .teaser:is(.card, .banner) .teaser-pre-title { order: 3; }
+main .teaser:is(.card, .banner) .teaser-body { order: 4; }
