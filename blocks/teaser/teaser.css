@@ -1,12 +1,10 @@
-main .teaser {
-    & .card {
-        display: flex;
-        flex-direction: column;
-        border: 1px solid rgba(0, 0, 0, 0.125);
-
-        & .teaser-image { order: 1; }
-        & .teaser-title { order: 2; }
-        & .teaser-pre-title { order: 3; }
-        & .teaser-body { order: 4; }
-    }
+main .teaser .card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.125);
 }
+
+main .teaser .card .teaser-image { order: 1; }
+main .teaser .card .teaser-title { order: 2; }
+main .teaser .card .teaser-pre-title { order: 3; }
+main .teaser .card .teaser-body { order: 4; }
