@@ -11,12 +11,12 @@ export default async function decorate(block) {
   Object.entries(childElements).forEach(([key, { className }], index) => {
     const element = block.children[index];
     if (element) {
-      element.classList.add(className);
-      childElements[key].element = element;
-    } 
+      if (!element.mediaBlock && element.textContent.trim() === '') {
+        element.remove();
+      } else {
+        element.classList.add(className);
+        childElements[key].element = element;
+      }
+    }
   });
-
-  if (childElements.hasImageBlock.element) {
-    childElements.hasImageBlock.element.remove();
-  }
 }
