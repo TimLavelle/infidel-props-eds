@@ -1,6 +1,6 @@
 export default async function decorate(block) {
   //   const [bg, fg] = block.children;
-  const [titleBlock, hasImageBlock, mediaBlock, preTitletextBlock, textBlock] = [...block.children].map(child => child.textContent.trim());
+  const [titleBlock, hasImageBlock, mediaBlock, preTitletextBlock, textBlock] = [...block.children].map(child);
   console.log(titleBlock);
 
   // Set standard Classnames
