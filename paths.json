@@ -1,6 +1,7 @@
 {
   "mappings": [
     "/content/infidel-props/:/",
-    "/content/infidel-props/icons/:/icons/"
+    "/content/infidel-props/icons/:/icons/",
+    "/content/aem-boilerplate/configuration:/.helix/config.json"
   ]
 }
