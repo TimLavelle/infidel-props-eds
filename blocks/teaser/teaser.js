@@ -4,7 +4,8 @@ export default async function decorate(block) {
     titleBlock: { className: 'teaser-title' },
     hasImageBlock: { className: 'teaser-has-image' },
     mediaBlock: { className: 'teaser-image' },
-    preTitleTextBlock: { className: 'teaser-pre-title' }
+    preTitleTextBlock: { className: 'teaser-pre-title' },
+    bodyBlock: { className: 'teaser-body' }
   };
 
   console.log(block.children);
@@ -17,6 +18,7 @@ export default async function decorate(block) {
     } 
   });
 
+  // Get rid of the selector block to show/hide the image authoring dialogue
   if (childElements.hasImageBlock.element) {
     childElements.hasImageBlock.element.remove();
   }
