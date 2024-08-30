@@ -15,4 +15,6 @@ export default async function decorate(block) {
       childElements[key].element = element;
     }
   });
+
+  hasImageBlock.remove();
 }
