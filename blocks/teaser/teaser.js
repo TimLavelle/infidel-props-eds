@@ -1,24 +1,11 @@
 export default async function decorate(block) {
   //   const [bg, fg] = block.children;
-  const props = [...block.children];
-  const mediaBlock = props[0];
-  const textBlock = props[1];
-  const teaserClassName = props[2].textContent.trim();
+  const [titleBlock, hasImageBlock, mediaBlock, preTitletextBlock, textBlock] = [...block.children].map(child => child.textContent.trim());
   console.log(props);
 
-  // Set standar Classnames
+  // Set standard Classnames
   const teaserBody = 'teaser-body';
   const teaserImage = 'teaser-image';
-
-  // If there's a Style assigned to the teaser, append it to the main block and remove from output
-  if (teaserClassName !== undefined) {
-    // Add the Clasname to the main block div
-    block.classList.add(teaserClassName);
-
-    // Remove the element from Rendering
-    // TODO Would this still output to SEO and is there a better way to manage styles
-    block.lastElementChild.remove();
-  }
 
   // Decorate the Teaserbody
   if (mediaBlock !== undefined) {
