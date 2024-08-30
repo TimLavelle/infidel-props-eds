@@ -8,9 +8,7 @@ export default async function decorate(block) {
   const teaserImage = 'teaser-image';
 
   // Decorate the Teaserbody
-  if (mediaBlock !== undefined) {
-    mediaBlock.classList.add(teaserImage);
-  }
+  if (mediaBlock) mediaBlock.classList.add(teaserImage);
 
   // Decorate the Teaserbody
   if (textBlock) {
