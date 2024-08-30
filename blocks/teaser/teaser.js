@@ -7,7 +7,7 @@ export default async function decorate(block) {
     preTitleTextBlock: { className: 'teaser-pre-title' }
   };
 
-  console.log(block);
+  console.log(block.children);
   
   Object.entries(childElements).forEach(([key, { className }], index) => {
     const element = block.children[index];
