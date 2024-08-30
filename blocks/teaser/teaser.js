@@ -13,9 +13,7 @@ export default async function decorate(block) {
     if (element) {
       element.classList.add(className);
       childElements[key].element = element;
-    } else if (element.textContent.trim() === '') {
-      element.remove();
-    }
+    } 
   });
 
   if (childElements.hasImageBlock.element) {
