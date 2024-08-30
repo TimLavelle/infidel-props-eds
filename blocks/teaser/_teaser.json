@@ -9,9 +9,7 @@
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
               "name": "Teaser",
-              "model": "teaser",
-              "foreground_title": "Add your Teaser content",
-              "foreground_titleType": "h3"
+              "model": "teaser"
             }
           }
         }
@@ -24,15 +22,15 @@
       "fields": [
         {
           "component": "text",
-          "name": "foreground_title",
-          "value": "",
+          "name": "title",
+          "value": "Add your Teaser content",
           "label": "Title",
           "valueType": "string",
           "required": true
         },
         {
           "component": "select",
-          "name": "foreground_titleType",
+          "name": "titleType",
           "value": "h3",
           "label": "Title Type",
           "valueType": "string",
@@ -51,14 +49,14 @@
         {
           "component": "reference",
           "valueType": "string",
-          "name": "background_image",
+          "name": "image",
           "label": "Image",
           "multi": false,
           "condition": { "===": [{"var" : "showTeaserImage"}, true] }
         },
         {
           "component": "text",
-          "name": "background_imageAlt",
+          "name": "imageAlt",
           "value": "",
           "label": "Image Alt",
           "description": "Alternative text for Accessibiliy Screen readers",
@@ -68,14 +66,14 @@
         },
         {
           "component": "text",
-          "name": "foreground_pretitle",
+          "name": "pretitle",
           "value": "",
           "label": "Pretitle",
           "valueType": "string"
         },
         {
           "component": "richtext",
-          "name": "foreground_description",
+          "name": "description",
           "value": "",
           "label": "Description",
           "valueType": "string",
