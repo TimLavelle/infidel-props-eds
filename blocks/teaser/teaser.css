@@ -7,6 +7,7 @@ main .teaser.card {
     border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
+// Set order for specific Teaser Layouts
 main .teaser:is(.card, .banner) .teaser-image { order: 1; }
 main .teaser:is(.card, .banner) .teaser-title { order: 2; }
 main .teaser:is(.card, .banner) .teaser-pre-title { order: 3; }
