@@ -14,7 +14,7 @@ export default async function decorate(block) {
       element.classList.add(className);
       childElements[key].element = element;
     } else {
-      childElements[key].element.remove();
+      element.remove();
     }
   });
 
