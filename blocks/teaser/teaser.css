@@ -1,4 +1,4 @@
-main .teaser.card {
+main .teaser:is(.card, .banner) {
     display: flex;
     flex-direction: column;
     border: 1px solid rgba(0, 0, 0, 0.125);
