@@ -20,6 +20,8 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-auto-rows: 1fr;
     gap: 1rem;
+    max-width: var(--grid-width-l);
+    margin: 0 auto;
 }
 
 .teaser-container:has(.card) .teaser-title, .teaser-container:has(.card) .teaser-pre-title, .teaser-container:has(.card) .teaser-body {

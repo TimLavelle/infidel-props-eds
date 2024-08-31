@@ -39,6 +39,12 @@
 
   /* nav height */
   --nav-height: 64px;
+
+  /* Grid Widths */
+  --grid-width-s: 600px;
+  --grid-width-m: 900px;
+  --grid-width-l: 1200px;
+  --grid-width-xl: 1800px;
 }
 
 @font-face {
@@ -48,7 +54,7 @@
   src: local('Arial');
 }
 
-@media (width >= 900px) {
+@media (width >= var(--grid-width-m)) {
   :root {
     --heading-font-size-xxl: 3.75em;  
     --heading-font-size-xl: 3em;     
@@ -206,15 +212,15 @@ main .section {
   padding: 64px 16px;
 }
 
-@media (width >= 600px) {
+@media (width >= var(--grid-width-s)) {
   main .section {
     padding: 64px 32px;
   }
 }
 
-@media (width >= 900px) {
+@media (width >= var(--grid-width-m)) {
   .section > div {
-    max-width: 1200px;
+    max-width: var(--grid-width-l);
     margin: auto;
   }
 }
