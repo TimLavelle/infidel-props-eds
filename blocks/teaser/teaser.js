@@ -1,11 +1,14 @@
 export default async function decorate(block) {
 
   const childElements = {
-    titleBlock: { className: 'teaser-title' },
-    hasImageBlock: { className: 'teaser-has-image' },
-    mediaBlock: { className: 'teaser-image' },
-    preTitleTextBlock: { className: 'teaser-pre-title' },
-    bodyBlock: { className: 'teaser-body' }
+    title: { className: 'teaser-title' },
+    imageLink: { className: 'teaser-title' },
+    hasImage: { className: 'teaser-img-link' },
+    media: { className: 'teaser-image' },
+    preTitle: { className: 'teaser-pre-title' },
+    body: { className: 'teaser-body' },
+    hasCTA: { className: 'teaser-ctas' },
+    cta: { className: 'teaser-ctas' }
   };
   
   Object.entries(childElements).forEach(([key, { className }], index) => {
@@ -16,8 +19,10 @@ export default async function decorate(block) {
     } 
   });
 
-  // Get rid of the selector block to show/hide the image authoring dialogue
-  if (childElements.hasImageBlock.teaserItem) {
-    childElements.hasImageBlock.teaserItem.remove();
-  }
+  // Get rid of the selector block to show/hide the optional elements in the authoring dialogue
+  ['hasImage', 'hasCTA'].forEach(key => {
+    if (childElements[key].teaserItem) {
+      childElements[key].teaserItem.remove();
+    }
+  });
 }

@@ -257,6 +257,22 @@
         "required": true
       },
       {
+        "component": "boolean",
+        "label": "Add a CTA",
+        "name": "showTeaserCTA",
+        "valueType": "boolean"
+      },
+      {
+        "component": "aem-content",
+        "name": "teaserCTA1",
+        "value": "",
+        "label": "CTA Link",
+        "description": "If a different link is desired for this CTA, enter it here",
+        "valueType": "string",
+        "required": false,
+        "condition": { "===": [{"var" : "showTeaserCTA"}, true] }
+      },
+      {
         "component": "multiselect",
         "name": "classes",
         "label": "Styles",
