@@ -212,15 +212,15 @@ main .section {
   padding: 64px 16px;
 }
 
-@media (width >= var(--grid-width-s)) {
+@media (width >= 600px) {
   main .section {
     padding: 64px 32px;
   }
 }
 
-@media (width >= var(--grid-width-m)) {
+@media (width >= 900px) {
   .section > div {
-    max-width: var(--grid-width-l);
+    max-width: 1200px;
     margin: auto;
   }
 }
