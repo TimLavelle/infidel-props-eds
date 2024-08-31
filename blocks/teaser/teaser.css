@@ -16,6 +16,7 @@
 /* Teaser Card Layout Styles */
 .teaser-container:has(.card) {
     display: grid;
+    align-items: start;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-auto-rows: 1fr;
     gap: 1rem;
@@ -25,4 +26,4 @@
     padding: 0 1rem;
 }
 
-.teaser-container:has(.card) .teaser-title h2, .teaser-container:has(.card) .teaser-title h3, .teaser-container:has(.card) .teaser-title h3 { font-size: var(--heading-font-size-xs); }
+.teaser-container:has(.card) .teaser-title h2, .teaser-container:has(.card) .teaser-title h3, .teaser-container:has(.card) .teaser-title h4 { font-size: var(--heading-font-size-xs); }
