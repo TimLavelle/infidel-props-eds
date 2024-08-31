@@ -58,8 +58,14 @@ export default async function decorate(block) {
         mediaLink.href = imageLinkHref;
         mediaLink.className = 'teaser-media-link';
         mediaLink.setAttribute('aria-label', `Image for ${teaserItem.querySelector('.teaser-title').textContent.trim()}`);
-        mediaElement.parentNode.insertBefore(mediaLink, mediaElement);
-        mediaLink.appendChild(mediaElement);
+        
+        const image = document.createElement('img');
+        image.src = mediaElement.src;
+        image.alt = mediaElement.alt || '';
+        image.className = mediaElement.className;
+
+        mediaLink.appendChild(image);
+        mediaElement.parentNode.replaceChild(mediaLink, mediaElement);
       }
     }
   }
