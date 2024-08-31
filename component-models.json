@@ -209,6 +209,15 @@
         ]
       },
       {
+        "component": "aem-content",
+        "name": "teaserLink",
+        "value": "",
+        "label": "Teaser Link",
+        "description": "Link for the entire teaser",
+        "valueType": "string",
+        "required": false
+      },
+      {
         "component": "boolean",
         "label": "Add a Teaser image?",
         "name": "showTeaserImage",
