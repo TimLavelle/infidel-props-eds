@@ -220,7 +220,7 @@ main .section {
 
 @media (width >= 900px) {
   .section > div {
-    max-width: var(--grid-width-1);
+    max-width: var(--grid-width-l);
     margin: auto;
   }
 }
