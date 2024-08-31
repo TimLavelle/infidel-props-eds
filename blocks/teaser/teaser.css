@@ -29,3 +29,18 @@
 }
 
 .teaser-container:has(.card) .teaser-title h2, .teaser-container:has(.card) .teaser-title h3, .teaser-container:has(.card) .teaser-title h4 { font-size: var(--heading-font-size-xs); }
+
+.teaser-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  .teaser-link:hover,
+  .teaser-link:focus {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    outline: none;
+  }
+  .teaser-link:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+  }

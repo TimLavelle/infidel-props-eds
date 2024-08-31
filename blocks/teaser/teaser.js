@@ -32,29 +32,38 @@ export default async function decorate(block) {
     }
   });
 
-  // Check if imageLink has a value
+  // Check if imageLink has content
   const imageLinkElement = childElements.find(item => item.key === 'imageLink').teaserItem;
   if (imageLinkElement && imageLinkElement.textContent.trim()) {
-    const linkUrl = imageLinkElement.textContent.trim();
-    
-    // Create a new div to wrap the entire teaser content
-    const wrapperDiv = document.createElement('div');
-    wrapperDiv.className = 'teaser-wrapper';
-    
-    // Move all child elements to the wrapper div
-    while (block.firstChild) {
-      wrapperDiv.appendChild(block.firstChild);
-    }
-    
-    // Create an anchor tag
-    const anchor = document.createElement('a');
-    anchor.href = linkUrl;
-    anchor.className = 'teaser-link';
-    
-    // Append the wrapper div to the anchor
-    anchor.appendChild(wrapperDiv);
-    
-    // Append the anchor to the block
-    block.appendChild(anchor);
+    const link = document.createElement('a');
+    link.href = imageLinkElement.textContent.trim();
+    link.classList.add('teaser-link');
+    link.setAttribute('tabindex', '0');
+    link.setAttribute('aria-label', 'Read more about ' + (childElements.find(item => item.key === 'title').teaserItem?.textContent.trim() || 'this topic'));
+
+    // Wrap the entire block content with the link
+    block.parentNode.insertBefore(link, block);
+    link.appendChild(block);
+
+    // Make internal elements focusable and clickable
+    const interactiveElements = block.querySelectorAll('a, button');
+    interactiveElements.forEach(element => {
+      element.setAttribute('tabindex', '0');
+      element.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+      element.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.stopPropagation();
+        }
+      });
+    });
+
+    // Prevent the main link from activating when clicking on interactive elements
+    block.addEventListener('click', (e) => {
+      if (e.target !== link) {
+        e.preventDefault();
+      }
+    });
   }
 }
