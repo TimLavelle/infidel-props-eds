@@ -11,6 +11,7 @@ export default async function decorate(block) {
     cta: { className: 'teaser-ctas' }
   };
   
+  // Add the teaser classes to the child elements for styling
   Object.entries(childElements).forEach(([key, { className }], index) => {
     const teaserItem = block.children[index];
     if (teaserItem) {
