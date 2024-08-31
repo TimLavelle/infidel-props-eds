@@ -26,7 +26,7 @@ export default async function decorate(block) {
   });
 
   // Get rid of the selector block to show/hide the optional elements in the authoring dialogue
-  ['hasImage', 'hasCTA'].forEach(key => {
+  ['hasImage', 'hasCTA', 'imageLink'].forEach(key => {
     if (childElements.find(item => item.key === key).teaserItem) {
       childElements.find(item => item.key === key).teaserItem.remove();
     }
