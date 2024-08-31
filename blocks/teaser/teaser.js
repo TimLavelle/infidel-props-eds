@@ -1,29 +1,34 @@
 export default async function decorate(block) {
 
-  const childElements = {
-    title: { className: 'teaser-title' },
-    imageLink: { className: 'teaser-title' },
-    hasImage: { className: 'teaser-img-link' },
-    media: { className: 'teaser-image' },
-    preTitle: { className: 'teaser-pre-title' },
-    body: { className: 'teaser-body' },
-    hasCTA: { className: 'teaser-ctas' },
-    cta: { className: 'teaser-ctas' }
-  };
+  const childElements = [
+    { key: 'title', className: 'teaser-title' },
+    { key: 'imageLink', className: 'teaser-img-link' },
+    { key: 'hasImage', className: 'teaser-has-img' },
+    { key: 'media', className: 'teaser-image' },
+    { key: 'preTitle', className: 'teaser-pre-title' },
+    { key: 'body', className: 'teaser-body' },
+    { key: 'hasCTA', className: 'teaser-ctas' },
+    { key: 'ctaLinkOne', className: 'teaser-ctas' },
+    { key: 'ctaLinkOneText', className: 'teaser-cta1-text' },
+    { key: 'ctaLinkOneTitle', className: 'teaser-cta1-title' },
+    { key: 'ctaLinkTwo', className: 'teaser-ctas' },
+    { key: 'ctaLinkTwoText', className: 'teaser-cta2-text' },
+    { key: 'ctaLinkTwoTitle', className: 'teaser-cta2-title' }
+  ];
   
   // Add the teaser classes to the child elements for styling
-  Object.entries(childElements).forEach(([key, { className }], index) => {
+  childElements.forEach(({ key, className }, index) => {
     const teaserItem = block.children[index];
     if (teaserItem) {
       teaserItem.classList.add(className);
-      childElements[key].teaserItem = teaserItem;
+      childElements[index].teaserItem = teaserItem;
     } 
   });
 
   // Get rid of the selector block to show/hide the optional elements in the authoring dialogue
   ['hasImage', 'hasCTA'].forEach(key => {
-    if (childElements[key].teaserItem) {
-      childElements[key].teaserItem.remove();
+    if (childElements.find(item => item.key === key).teaserItem) {
+      childElements.find(item => item.key === key).teaserItem.remove();
     }
   });
 }

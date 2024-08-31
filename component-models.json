@@ -266,9 +266,47 @@
         "component": "aem-content",
         "name": "teaserCTA1",
         "value": "",
-        "label": "CTA Link",
+        "label": "CTA Link 1",
         "description": "If a different link is desired for this CTA, enter it here",
         "valueType": "string",
+        "required": false,
+        "condition": { "===": [{"var" : "showTeaserCTA"}, true] }
+      },
+      {
+        "component": "text",
+        "name": "teaserCTA1linkText",
+        "label": "Text",
+        "required": false,
+        "condition": { "===": [{"var" : "showTeaserCTA"}, true] }
+      },
+      {
+        "component": "text",
+        "name": "teaserCTA1_linkTitle",
+        "label": "Title",
+        "required": false,
+        "condition": { "===": [{"var" : "showTeaserCTA"}, true] }
+      },
+      {
+        "component": "aem-content",
+        "name": "teaserCTA2",
+        "value": "",
+        "label": "CTA Link 2",
+        "description": "If a different link is desired for this CTA, enter it here",
+        "valueType": "string",
+        "required": false,
+        "condition": { "===": [{"var" : "showTeaserCTA"}, true] }
+      },
+      {
+        "component": "text",
+        "name": "teaserCTA2_linkText",
+        "label": "Text",
+        "required": false,
+        "condition": { "===": [{"var" : "showTeaserCTA"}, true] }
+      },
+      {
+        "component": "text",
+        "name": "teaserCTA2_linkTitle",
+        "label": "Title",
         "required": false,
         "condition": { "===": [{"var" : "showTeaserCTA"}, true] }
       },
@@ -301,6 +339,23 @@
               {
                 "name": "Banner",
                 "value": "banner"
+              }
+            ]
+          },
+          {
+            "name": "CTAs",
+            "children": [
+              {
+                "name": "Primary",
+                "value": "btn-primary"
+              },
+              {
+                "name": "Secondary",
+                "value": "btn-secondary"
+              },
+              {
+                "name": "Outline",
+                "value": "btn-tertiary"
               }
             ]
           }
