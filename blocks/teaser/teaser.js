@@ -31,4 +31,30 @@ export default async function decorate(block) {
       childElements.find(item => item.key === key).teaserItem.remove();
     }
   });
+
+  // Check if imageLink has a value
+  const imageLinkElement = childElements.find(item => item.key === 'imageLink').teaserItem;
+  if (imageLinkElement && imageLinkElement.textContent.trim()) {
+    const linkUrl = imageLinkElement.textContent.trim();
+    
+    // Create a new div to wrap the entire teaser content
+    const wrapperDiv = document.createElement('div');
+    wrapperDiv.className = 'teaser-wrapper';
+    
+    // Move all child elements to the wrapper div
+    while (block.firstChild) {
+      wrapperDiv.appendChild(block.firstChild);
+    }
+    
+    // Create an anchor tag
+    const anchor = document.createElement('a');
+    anchor.href = linkUrl;
+    anchor.className = 'teaser-link';
+    
+    // Append the wrapper div to the anchor
+    anchor.appendChild(wrapperDiv);
+    
+    // Append the anchor to the block
+    block.appendChild(anchor);
+  }
 }
