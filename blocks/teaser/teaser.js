@@ -8,62 +8,71 @@ export default async function decorate(block) {
     { key: 'preTitle', className: 'teaser-pre-title' },
     { key: 'body', className: 'teaser-body' },
     { key: 'hasCTA', className: 'teaser-ctas' },
-    { key: 'ctaLinkOne', className: 'teaser-ctas' },
+    { key: 'ctaLinkOne', className: 'teaser-cta1' },
     { key: 'ctaLinkOneText', className: 'teaser-cta1-text' },
     { key: 'ctaLinkOneTitle', className: 'teaser-cta1-title' },
-    { key: 'ctaLinkTwo', className: 'teaser-ctas' },
+    { key: 'ctaLinkTwo', className: 'teaser-cta2' },
     { key: 'ctaLinkTwoText', className: 'teaser-cta2-text' },
     { key: 'ctaLinkTwoTitle', className: 'teaser-cta2-title' }
   ];
-  
-  // Add the teaser classes to the child elements for styling
-  childElements.forEach(({ key, className }, index) => {
-    const teaserItem = block.children[index];
-    if (teaserItem) {
-      teaserItem.classList.add(className);
-      childElements[index].teaserItem = teaserItem;
-    } 
-  });
 
-  // Get rid of the selector block to show/hide the optional elements in the authoring dialogue
-  ['hasImage', 'hasCTA', 'imageLink'].forEach(key => {
-    if (childElements.find(item => item.key === key).teaserItem) {
-      childElements.find(item => item.key === key).teaserItem.remove();
+  const teaserList = document.createElement('ul');
+  teaserList.className = 'teaser-list';
+
+  const teaserItem = document.createElement('li');
+  teaserItem.className = 'teaser-item';
+
+  childElements.forEach(({ key, className }, index) => {
+    const element = block.children[index];
+    if (element) {
+      element.classList.add(className);
+      teaserItem.appendChild(element);
     }
   });
 
-  // Check if imageLink has content
-  const imageLinkElement = childElements.find(item => item.key === 'imageLink').teaserItem;
-  if (imageLinkElement && imageLinkElement.textContent.trim()) {
-    const link = document.createElement('a');
-    link.href = imageLinkElement.textContent.trim();
-    link.classList.add('teaser-link');
-    link.setAttribute('tabindex', '0');
-    link.setAttribute('aria-label', 'Read more about ' + (childElements.find(item => item.key === 'title').teaserItem?.textContent.trim() || 'this topic'));
+  const imageLink = teaserItem.querySelector('.teaser-img-link');
+  const ctaLinkOne = teaserItem.querySelector('.teaser-cta1');
+  const ctaLinkTwo = teaserItem.querySelector('.teaser-cta2');
 
-    // Wrap the entire block content with the link
-    block.parentNode.insertBefore(link, block);
-    link.appendChild(block);
+  if (imageLink) {
+    const imageLinkHref = imageLink.textContent.trim();
+    const mediaElement = teaserItem.querySelector('.teaser-image');
 
-    // Make internal elements focusable and clickable
-    const interactiveElements = block.querySelectorAll('a, button');
-    interactiveElements.forEach(element => {
-      element.setAttribute('tabindex', '0');
-      element.addEventListener('click', (e) => {
-        e.stopPropagation();
+    if (imageLinkHref === ctaLinkOne?.textContent.trim() || imageLinkHref === ctaLinkTwo?.textContent.trim()) {
+      // Whole card is clickable
+      const cardLink = document.createElement('a');
+      cardLink.href = imageLinkHref;
+      cardLink.className = 'teaser-card-link';
+      cardLink.setAttribute('aria-label', `${teaserItem.querySelector('.teaser-title').textContent.trim()} (Link to full article)`);
+
+      teaserItem.querySelectorAll('a').forEach(link => {
+        link.setAttribute('tabindex', '-1');
+        link.setAttribute('aria-hidden', 'true');
       });
-      element.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.stopPropagation();
-        }
-      });
-    });
 
-    // Prevent the main link from activating when clicking on interactive elements
-    block.addEventListener('click', (e) => {
-      if (e.target !== link) {
-        e.preventDefault();
+      teaserItem.appendChild(cardLink);
+    } else {
+      // Only media element is clickable
+      if (mediaElement) {
+        const mediaLink = document.createElement('a');
+        mediaLink.href = imageLinkHref;
+        mediaLink.className = 'teaser-media-link';
+        mediaLink.setAttribute('aria-label', `Image for ${teaserItem.querySelector('.teaser-title').textContent.trim()}`);
+        mediaElement.parentNode.insertBefore(mediaLink, mediaElement);
+        mediaLink.appendChild(mediaElement);
       }
-    });
+    }
   }
+
+  // Remove selector blocks
+  ['hasImage', 'hasCTA', 'imageLink'].forEach(key => {
+    const element = teaserItem.querySelector(`.${childElements.find(item => item.key === key).className}`);
+    if (element) {
+      element.remove();
+    }
+  });
+
+  teaserList.appendChild(teaserItem);
+  block.textContent = '';
+  block.appendChild(teaserList);
 }

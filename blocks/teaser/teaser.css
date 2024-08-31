@@ -15,11 +15,6 @@
 
 /* Teaser Card Layout Styles */
 .teaser-container:has(.card) {
-    display: grid;
-    align-items: start;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-auto-rows: 1fr;
-    gap: 1rem;
     max-width: var(--grid-width-l);
     margin: 0 auto;
 }
@@ -42,4 +37,94 @@
 .teaser-container .teaser-wrapper .teaser-link:focus-visible {
     outline: 2px solid #000;
     outline-offset: 2px;
+}
+
+.teaser-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.teaser-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.3s ease;
+}
+
+.teaser-item:hover,
+.teaser-item:focus-within {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.teaser-item:focus-within {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
+
+.teaser-card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.teaser-card-link:focus {
+    outline: none;
+}
+
+.teaser-item:focus-within .teaser-card-link:focus {
+    outline: 2px solid #000;
+    outline-offset: -4px;
+}
+
+.teaser-media-link:focus,
+.teaser-cta1:focus,
+.teaser-cta2:focus {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+    z-index: 2;
+}
+
+.teaser-image {
+    width: 100%;
+    height: auto;
+}
+
+.teaser-title,
+.teaser-pre-title,
+.teaser-body {
+    padding: 0 1rem;
+}
+
+.teaser-title h2,
+.teaser-title h3,
+.teaser-title h4 {
+    font-size: var(--heading-font-size-xs);
+}
+
+.teaser-cta1,
+.teaser-cta2 {
+    display: inline-block;
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    z-index: 2;
+}
+
+.teaser-cta1:hover,
+.teaser-cta2:hover,
+.teaser-cta1:focus,
+.teaser-cta2:focus {
+    background-color: #e0e0e0;
 }
