@@ -266,6 +266,7 @@
         "component": "button",
         "name": "ctaLinkOne",
         "label": "CTA 1",
+        "valueType": "string",
         "required": false,
         "condition": { "===": [{"var" : "showTeaserCTA"}, true] }
       },
