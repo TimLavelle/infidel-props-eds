@@ -34,17 +34,31 @@ export default async function decorate(block) {
 
   const auPorts = await fetchAuPorts();
   const titleElement = document.createElement('div');
-  titleElement.className = 'deals-title-container';
+  titleElement.className = 'deals-title-container dropdown-container';
+
+  const selectedPort = auPorts.flightDeals.model.departures.find(port => port.cityCode === params.fromPort);
+  
+  const createListItem = (port) => {
+    const li = document.createElement('li');
+    li.setAttribute('role', 'option');
+    li.setAttribute('tabindex', '0');
+    li.dataset.value = port.cityCode;
+    li.textContent = port.cityName;
+    return li;
+  };
+
   titleElement.innerHTML = `
-    <p class="deals-title">${params.title}</p>
-    <select id="citySelector" aria-label="Select departure city">
-      ${auPorts.flightDeals.model.departures.map(port => `
-        <option value="${port.cityCode}" ${port.cityCode === params.fromPort ? 'selected' : ''}>
-          ${port.cityName}
-        </option>
-      `).join('')}
-    </select>
+    <label for="destination-select" class="deals-title">${params.title}</label>
+    <button aria-haspopup="listbox" aria-expanded="false" id="destination-button">
+      ${selectedPort ? selectedPort.cityName : 'Select a city'}
+    </button>
+    <ul id="destination-listbox" role="listbox" aria-label="Destination list" tabindex="-1"></ul>
   `;
+
+  const listbox = titleElement.querySelector('#destination-listbox');
+  auPorts.flightDeals.model.departures.forEach(port => {
+    listbox.appendChild(createListItem(port));
+  });
 
   const citySelector = titleElement.querySelector('#citySelector');
   citySelector.addEventListener('change', async (event) => {
