@@ -183,7 +183,6 @@
     background-color: #f9f9f9;
     border-bottom: 1px solid #d9d9d9;
     border-right: 1px solid #d9d9d9;
-    min-height: 2.5rem;
     padding: .875rem 1rem;
     text-align: left;
     white-space: nowrap;
@@ -192,7 +191,9 @@
   }
   
   .dropdown-container li:hover, .dropdown-container li:focus {
-    background-color: #f0f0f0;
+    background-color: #fff;
+    outline: 2px solid #007bff;
+    border-left: 5px solid #008080;
   }
   
   .dropdown-container li[aria-selected="true"] {
