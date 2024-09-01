@@ -39,12 +39,12 @@ export default async function decorate(block) {
   const selectedPort = auPorts.flightDeals.model.departures.find(port => port.cityCode === params.fromPort);
   
   const createListItem = (port) => {
-    const li = document.createElement('li');
-    li.setAttribute('role', 'option');
-    li.setAttribute('tabindex', '0');
-    li.dataset.value = port.cityCode;
-    li.textContent = port.cityName;
-    return li;
+    const liListbox  = document.createElement('li');
+    liListbox.setAttribute('role', 'option');
+    liListbox.setAttribute('tabindex', '0');
+    liListbox.dataset.value = port.cityCode;
+    liListbox.textContent = port.cityName;
+    return liListbox;
   };
 
   titleElement.innerHTML = `
