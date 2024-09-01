@@ -1,5 +1,6 @@
 import { BlockUtils } from '../../utils/blockUtils.js';
 import { createOptimizedPicture } from '../../scripts/aem.js';
+import auPorts from '../../utils/resources/auPorts.json';
 
 export default async function decorate(block) {
   const childElements = [
@@ -36,20 +37,18 @@ export default async function decorate(block) {
   const flightImage = 'https://tims-personal-stuff.s3.ap-southeast-2.amazonaws.com/poolside-beach-chairs-jamaica.jpg';
   const link = 'https://www.qantas.com/au/en/flight-deals/flights-from-sydney-to-ballina-byron.html/syd/bnk/economy?int_cam=au:en:flight-deals-home-page:flight-deals-hp:en:nn';
 
-  // Create a div element for the title
-  const titleDiv = document.createElement('div');
-  titleDiv.className = 'deals-title-container';
+  const getCityName = (cityCode) => {
+    const departure = auPorts.flightDeals.model.departures.find(dep => dep.cityCode === cityCode);
+    return departure ? departure.cityName : cityCode;
+  };
 
-  // Create a p tag for the title content
-  const titleP = document.createElement('p');
-  titleP.className = 'deals-title';
-  titleP.textContent = params.title;
-
-  // Append the p tag to the div
-  titleDiv.appendChild(titleP);
-
-  // Insert the title div at the beginning of the block
-  block.insertBefore(titleDiv, block.firstChild);
+  // Create and insert title element
+  const titleElement = document.createElement('div');
+  titleElement.className = 'deals-title-container';
+  titleElement.innerHTML = `
+    <p class="deals-title">${params.title} ${getCityName(params.fromPort)}</p>
+  `;
+  block.insertBefore(titleElement, block.firstChild);
   
   try {
     const response = await fetch(dealsAPI + dealsAPIParams);
