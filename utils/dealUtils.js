@@ -40,6 +40,14 @@ export function updateDeals(deals, block, params, link) {
   const fragment = document.createDocumentFragment();
   deals.offers.forEach(offer => fragment.appendChild(createDealElement(offer, params, link)));
   
+  if (!block.querySelector('.deals-container')) {
+    const dealsContainer = document.createElement('div');
+    dealsContainer.className = 'deals-container';
+    dealsContainer.appendChild(ul);
+    block.appendChild(dealsContainer);
+  } else {
+    block.querySelector('.deals-container').appendChild(ul);
+  }
   ul.appendChild(fragment);
   if (!block.contains(ul)) block.appendChild(ul);
 }
