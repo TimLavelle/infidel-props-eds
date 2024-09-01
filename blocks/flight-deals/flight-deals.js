@@ -33,7 +33,7 @@ export default async function decorate(block) {
   const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers';
   const dealsAPIParams = `?departureAirport=${params.fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
   const flightImage = 'https://tims-personal-stuff.s3.ap-southeast-2.amazonaws.com/poolside-beach-chairs-jamaica.jpg';
-  console.log(params.showDealImages);
+  
   try {
     const response = await fetch(dealsAPI + dealsAPIParams);
     const deals = await response.json();
@@ -46,7 +46,7 @@ export default async function decorate(block) {
       li.className = 'deal-item';
       li.innerHTML = `
         <div class="flight-deal-card">
-          ${params.showDealImages === 'true' ? `<div class="flight-deal-image-container"><img src="${flightImage}" alt="Flight Deal Image" class="flight-deal-image"></div>` : ''}
+          ${params.showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container"><img src="${flightImage}" alt="Flight Deal Image" class="flight-deal-image"></div>` : ''}
           ${offer.sale.iconName !== '' ? `<span class="sale-badge">${offer.sale.iconName}</span>` : ''}
           <p class="flight-title"><strong>${offer.route.to.name}</strong></p>
           <p class="flight-type">${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from</p>

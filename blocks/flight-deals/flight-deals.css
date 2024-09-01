@@ -11,16 +11,28 @@
   flex-direction: var(--card-flex-direction);
 }
 
+/* Accessibility: Ensure proper focus styles for interactive elements */
+.flight-deal-card:focus,
+.flight-deal-card:focus-within {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
 .flight-deals ul {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .flight-deals li {
   flex: 1 1 calc(25% - 1rem);
   max-width: calc(25% - 1rem);
+  padding: 0;
+  margin: 0;
 }
 
 @media (max-width: 899px) {
@@ -35,21 +47,6 @@
     flex: 1 1 100%;
     max-width: 100%;
   }
-}
-
-.flight-deals ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
-
-.flight-deals li {
-  padding: 0;
-  margin: 0;
 }
 
 /* Flex grid layout for desktop */
@@ -80,12 +77,13 @@
   border-bottom: 2px solid #ccc;
 }
 
+/* Accessibility: Ensure proper contrast for the sale badge */
 .sale-badge {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #7fffd4;
-  color: #333;
+  background-color: #008080; /* Changed for better contrast */
+  color: #ffffff; /* Changed for better contrast */
   font-size: 12px;
   font-weight: bold;
   padding: 4px 8px;
@@ -99,9 +97,10 @@
   margin-bottom: 8px;
 }
 
+/* Accessibility: Increase font size for better readability */
 .flight-type {
   color: #323232;
-  font-size: .75rem;
+  font-size: .875rem; /* Increased from .75rem */
   font-weight: 400;
   text-align: right;
   margin: 0;
@@ -125,10 +124,11 @@
   text-align: center;
 }
 
+/* Accessibility: Ensure proper contrast for the price */
 .price {
   font-size: 1.875rem;
   font-weight: bold;
-  color: #e44;
+  color: #d00; /* Changed from #e44 for better contrast */
   text-align: right;
   margin: 0;
 }
@@ -136,4 +136,38 @@
 .price-currency {
   font-size: 18px;
   vertical-align: super;
+}
+
+/* Accessibility: Add focus styles for interactive elements */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+/* Accessibility: Ensure proper color contrast for all text */
+body {
+  color: #333; /* Ensure this contrasts well with your background colors */
+}
+
+/* Accessibility: Add styles for skip-to-content link */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-to-content:focus {
+  left: 0;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  background: #fff;
+  z-index: 9999;
 }

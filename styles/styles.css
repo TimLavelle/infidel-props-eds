@@ -18,6 +18,7 @@
   --dark-color: #323232;
   --light-color: #f4f5f6;
   --text-color: #000;
+  --focus-color: #4D90FE; /* New focus color with good contrast */
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback;
@@ -158,6 +159,16 @@ a:hover {
   color: var(--link-hover-color);
 }
 
+/* Focus styles for interactive elements */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
 /* buttons */
 a.button:any-link,
 button {
@@ -191,7 +202,7 @@ button:focus {
 button:disabled,
 button:disabled:hover {
   background-color: var(--light-color);
-  cursor: unset;
+  cursor: not-allowed;
 }
 
 a.button.secondary,
@@ -245,4 +256,10 @@ main .section.highlight {
 /* Columns */
 .columns > div {
   align-items: flex-start !important;
+}
+
+/* Keyboard focus styles */
+*:focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
 }
