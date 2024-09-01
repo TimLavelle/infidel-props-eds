@@ -13,7 +13,7 @@ export default async function decorate(block) {
   ];
 
   addBlockClasses(block, childElements);
-  removeUtilityElements(childElements, ['fromPort', 'travelClass', 'showDealImages', 'showDisclaimers']);
+  // removeUtilityElements(childElements, ['fromPort', 'travelClass', 'showDealImages', 'showDisclaimers']);
 
   const fromPort = getTrimmedContent(childElements, 'fromPort');
   const showDisclaimers = getTrimmedContent(childElements, 'showDisclaimers');
