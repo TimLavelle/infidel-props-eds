@@ -48,6 +48,11 @@ export default async function decorate(block) {
       const container = li.querySelector('.flight-deal-card');
       const containerWidth = container ? container.offsetWidth : 750; 
       const optimizedPic = createOptimizedPicture(flightImage, 'Flight Deal Image', false, [{ width: containerWidth.toString() }]);
+
+
+      console.log(optimizedPic);
+
+      
       li.className = 'deal-item';
       li.innerHTML = `
         <div class="flight-deal-card">
