@@ -33,7 +33,7 @@ export default async function decorate(block) {
   const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers';
   const dealsAPIParams = `?departureAirport=${params.fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
   const flightImage = 'https://tims-personal-stuff.s3.ap-southeast-2.amazonaws.com/poolside-beach-chairs-jamaica.jpg';
-  console.log(flightImage);
+  console.log(params.showDealImages);
   try {
     const response = await fetch(dealsAPI + dealsAPIParams);
     const deals = await response.json();
