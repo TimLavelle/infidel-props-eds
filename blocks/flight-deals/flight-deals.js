@@ -13,7 +13,7 @@ export default async function decorate(block) {
       <li>
         <div class="deal-item">
           <div class="deal-item-image">
-            ${createOptimizedPicture(offer.images[0], 'deal-item-image', false, true)}
+            image placeholder
           </div>
           <div class="deal-item-content">
             ${offer.sale && typeof offer.sale === 'object' && offer.sale.name ? `<p>${offer.sale.name}</p>` : ''}
