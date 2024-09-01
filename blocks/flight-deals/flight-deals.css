@@ -1,4 +1,4 @@
-.flight-deal-card {
+.flight-deals .deal-item .flight-deal-card {
   font-family: Arial, sans-serif;
   background-color: white;
   border-radius: 8px;
@@ -11,7 +11,7 @@
   margin: 0 auto;
 }
 
-.flight-deals ul {
+.flight-deals .deal-item .flight-deals ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -21,24 +21,24 @@
   justify-content: center;
 }
 
-.flight-deals li {
+.flight-deals .deal-item .flight-deals li {
   padding: 0;
   margin: 0;
 }
 
 /* Flex grid layout for desktop */
 @media (min-width: 900px) {
-  .flight-deals ul {
+  .flight-deals .deal-item .flight-deals ul {
     justify-content: flex-start;
   }
 
-  .flight-deals li {
+  .flight-deals .deal-item .flight-deals li {
     flex: 0 1 calc(25% - 1rem);
     max-width: calc(25% - 1rem);
   }
 }
 
-.sale-badge {
+.flight-deals .deal-item .sale-badge {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -51,25 +51,25 @@
   text-transform: uppercase;
 }
 
-.destination {
+.flight-deals .deal-item .destination {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
-.flight-type {
+.flight-deals .deal-item .flight-type {
   font-size: 14px;
   color: #666;
   margin-bottom: 12px;
 }
 
-.price {
+.flight-deals .deal-item .price {
   font-size: 28px;
   font-weight: bold;
   color: #e44;
 }
 
-.price-currency {
+.flight-deals .deal-item .price-currency {
   font-size: 18px;
   vertical-align: super;
 }
