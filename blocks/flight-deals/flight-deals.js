@@ -1,5 +1,6 @@
 import { BlockUtils } from '../../utils/blockUtils.js';
 import { createOptimizedPicture } from '../../scripts/aem.js';
+import { createResponsiveImage } from '../../utils/imageUtils.js';
 
 export default async function decorate(block) {
   const childElements = [
@@ -49,7 +50,7 @@ export default async function decorate(block) {
       li.innerHTML = `
         <div class="flight-deal-card">
           <a href="${link}" aria-label="Flight deal to ${offer.route.to.name}: ${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from ${offer.price.symbol}${offer.price.amountFormatted}" tabindex="0">
-            ${params.showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container"><img src="${flightImage}" alt="" role="presentation" class="flight-deal-image"></div>` : ''}
+            ${params.showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container"></div>` : ''}
             ${offer.sale.iconName !== '' ? `<span class="sale-badge" aria-hidden="true">${offer.sale.iconName}</span>` : ''}
             <p class="flight-title"><strong>${offer.route.to.name}</strong></p>
             <p class="flight-type">${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from</p>
@@ -62,6 +63,12 @@ export default async function decorate(block) {
 
     ul.appendChild(fragment);
     block.appendChild(ul);
+
+    if (params.showDealImages === 'true' && flightImage) {
+      li.querySelector('.flight-deal-image-container').appendChild(
+        createResponsiveImage(flightImage, '', 'flight-deal-image')
+      );
+    }
   } catch (error) {
     console.error('Error fetching deals:', error);
   }
