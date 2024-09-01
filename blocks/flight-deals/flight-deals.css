@@ -18,7 +18,7 @@
   outline-offset: 2px;
 }
 
-.flight-deals ul {
+.deals-container .flight-deals ul {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -28,7 +28,7 @@
   margin: 0;
 }
 
-.flight-deals li {
+.deals-container .flight-deals li {
   flex: 1 1 calc(25% - 1rem);
   max-width: calc(25% - 1rem);
   padding: 0;
@@ -173,6 +173,7 @@
     margin: 0;
     border: 1px solid #ccc;
     background-color: #fff;
+    z-index: 1000;
   }
   
   .dropdown-container li {
