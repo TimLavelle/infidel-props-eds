@@ -1,6 +1,14 @@
 import { BlockUtils } from '../../utils/blockUtils.js';
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import auPorts from '../../utils/resources/auPorts.json';
+
+const flightImage = 'https://tims-personal-stuff.s3.ap-southeast-2.amazonaws.com/poolside-beach-chairs-jamaica.jpg';
+const link = 'https://www.qantas.com/au/en/flight-deals/flights-from-sydney-to-ballina-byron.html/syd/bnk/economy?int_cam=au:en:flight-deals-home-page:flight-deals-hp:en:nn';
+const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers';
+
+async function fetchAuPorts() {
+  const response = await fetch('../../utils/resources/auPorts.json');
+  return response.json();
+}
 
 export default async function decorate(block) {
   const childElements = [
@@ -31,22 +39,20 @@ export default async function decorate(block) {
     .map(sale => `&saleName=${sale.trim()}`)
     .join('') || '';
 
-  const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers';
   const dealsAPIParams = `?departureAirport=${params.fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
 
-  const flightImage = 'https://tims-personal-stuff.s3.ap-southeast-2.amazonaws.com/poolside-beach-chairs-jamaica.jpg';
-  const link = 'https://www.qantas.com/au/en/flight-deals/flights-from-sydney-to-ballina-byron.html/syd/bnk/economy?int_cam=au:en:flight-deals-home-page:flight-deals-hp:en:nn';
-
-  const getCityName = (cityCode) => {
+  const getCityName = async (cityCode) => {
+    const auPorts = await fetchAuPorts();
     const departure = auPorts.flightDeals.model.departures.find(dep => dep.cityCode === cityCode);
     return departure ? departure.cityName : cityCode;
   };
 
   // Create and insert title element
+  const cityName = await getCityName(params.fromPort);
   const titleElement = document.createElement('div');
   titleElement.className = 'deals-title-container';
   titleElement.innerHTML = `
-    <p class="deals-title">${params.title} ${getCityName(params.fromPort)}</p>
+    <p class="deals-title">${params.title} ${cityName}</p>
   `;
   block.insertBefore(titleElement, block.firstChild);
   
