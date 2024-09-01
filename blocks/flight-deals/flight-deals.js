@@ -1,7 +1,6 @@
 import { BlockUtils } from '../../utils/blockUtils.js';
 
 export default async function decorate(block) {
-
   const childElements = [
     { key: 'title', className: 'deals-title' },
     { key: 'showDealImages', className: 'deals-show-deal-images' },
@@ -16,45 +15,47 @@ export default async function decorate(block) {
   blockUtils.removeUtilityElements(['showDealImages', 'showDisclaimers', 'saleName', 'fromPort', 'travelClass', 'toPorts']);
 
   const fields = ['fromPort', 'showDisclaimers', 'saleName', 'toPorts', 'travelClass'];
-  const { fromPort, showDisclaimers, saleName, toPorts, travelClass } = Object.fromEntries(
-    fields.map(key => [key, blockUtils.getTrimmedContent(key) || ''])
-  );
+  const params = fields.reduce((acc, key) => {
+    const value = blockUtils.getTrimmedContent(key);
+    if (value) acc[key] = value;
+    return acc;
+  }, {});
 
-  // Split toPorts string into an array and process each destination
-  const destinationParams = toPorts.split(',')
-    .map(toPort => toPort.trim())
-    .filter(toPort => toPort !== '')
-    .map(toPort => `&destination=${toPort}:${travelClass}`)
-    .join('');
+  const destinationParams = params.toPorts?.split(',')
+    .map(toPort => `&destination=${toPort.trim()}:${params.travelClass}`)
+    .join('') || '';
 
-  const saleNameParams = saleName.split(',')
-    .map(sale => sale.trim())
-    .filter(sale => sale !== '')
-    .map(sale => `&saleName=${sale}`)
-    .join('');
+  const saleNameParams = params.saleName?.split(',')
+    .map(sale => `&saleName=${sale.trim()}`)
+    .join('') || '';
 
-  // Construct the API URL with the processed destination parameters
   const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers';
-  const dealsAPIParams = `?departureAirport=${fromPort}&includeDisclaimers=${showDisclaimers}${saleNameParams}${destinationParams}`;
-  const deals = await fetch(dealsAPI + dealsAPIParams).then(res => res.json());
+  const dealsAPIParams = `?departureAirport=${params.fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
+  
+  try {
+    const response = await fetch(dealsAPI + dealsAPIParams);
+    const deals = await response.json();
 
-  const ul = document.createElement('ul');
-  let dealsItems = '';
+    const ul = document.createElement('ul');
+    const fragment = document.createDocumentFragment();
 
-  deals.offers.forEach(offer => {
-    dealsItems += `
-      <li class="deal-item">
+    deals.offers.forEach(offer => {
+      const li = document.createElement('li');
+      li.className = 'deal-item';
+      li.innerHTML = `
         <div class="deal-item-content">
           ${offer.sale && typeof offer.sale === 'object' ? `<p>${offer.sale.iconName}</p>` : ''}
           <p><strong>${offer.route.to.name}</strong></p>
-          <p class="deal-item-type">${offer.travelClass + ' ' + offer.tripType} from</p>
+          <p class="deal-item-type">${offer.travelClass} ${offer.tripType} from</p>
           <p>${offer.price.symbol} ${offer.price.amountFormatted}</p>
         </div>
-      </li>
-    `;
-  });
+      `;
+      fragment.appendChild(li);
+    });
 
-  ul.innerHTML = dealsItems;
-  block.append(ul);
-
+    ul.appendChild(fragment);
+    block.appendChild(ul);
+  } catch (error) {
+    console.error('Error fetching deals:', error);
+  }
 }
