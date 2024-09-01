@@ -34,7 +34,7 @@ export function createDealElement(offer, params, link) {
 }
 
 export function updateDeals(deals, block, params, link) {
-  const ul = block.querySelector('ul') || document.createElement('ul');
+  const ul = block.querySelector('.deals-container ul') || document.createElement('ul');
   ul.innerHTML = '';
   
   const fragment = document.createDocumentFragment();
