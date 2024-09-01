@@ -19,12 +19,20 @@ export default async function decorate(block) {
   const { fromPort, showDisclaimers, saleName, toPorts, travelClass } = Object.fromEntries(
     fields.map(key => [key, blockUtils.getTrimmedContent(key) || ''])
   );
-  
+  // Split toPorts string into an array and process each destination
+  const destinationParams = toPorts.split(',')
+    .map(toPort => toPort.trim())
+    .filter(toPort => toPort !== '') // Remove any empty strings
+    .map(toPort => `&destination=${toPort}:${travelClass}`)
+    .join('');
+
+  // Construct the API URL with the processed destination parameters
+  const dealsAPI = `https://www.qantas.com/api/flightOffers/v2/offers?departureAirport=${fromPort}&includeDisclaimers=${showDisclaimers}&saleName=${saleName}${destinationParams}`;
   console.log(toPorts);
 
 
 
-  const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers?departureAirport=' + fromPort + '&includeDisclaimers=' + showDisclaimers + '&saleName=' + saleName + '&destination=CDG:ECONOMY&destination=LHR:ECONOMY';  
+  // const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers?departureAirport=' + fromPort + '&includeDisclaimers=' + showDisclaimers + '&saleName=' + saleName + '&destination=CDG:ECONOMY&destination=LHR:ECONOMY';  
   const deals = await fetch(dealsAPI).then(res => res.json());
 
   const ul = document.createElement('ul');
