@@ -73,7 +73,10 @@
 }
 
 .flight-deal-image-container img {
-  border-radius: var(--card-border-radius);
+  border-top-left-radius: var(--card-border-radius);
+  border-top-right-radius: var(--card-border-radius);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .sale-badge {
