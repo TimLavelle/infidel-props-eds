@@ -11,7 +11,7 @@
   margin: 0 auto;
 }
 
-.flight-deals .deal-item .flight-deals ul {
+.flight-deals .deal-item ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -21,18 +21,18 @@
   justify-content: center;
 }
 
-.flight-deals .deal-item .flight-deals li {
+.flight-deals .deal-item li {
   padding: 0;
   margin: 0;
 }
 
 /* Flex grid layout for desktop */
 @media (min-width: 900px) {
-  .flight-deals .deal-item .flight-deals ul {
+  .flight-deals .deal-item ul {
     justify-content: flex-start;
   }
 
-  .flight-deals .deal-item .flight-deals li {
+  .flight-deals .deal-item li {
     flex: 0 1 calc(25% - 1rem);
     max-width: calc(25% - 1rem);
   }
