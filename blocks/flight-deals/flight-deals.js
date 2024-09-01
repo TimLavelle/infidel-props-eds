@@ -46,10 +46,12 @@ async function fetchAndUpdateDeals(apiParams, block, params, link) {
     if (deals.offers && deals.offers.length > 0) {
       updateDeals(deals, block, params, link);
     } else {
+      const ul = block.querySelector('ul') || document.createElement('ul');
       const auPorts = await fetchAuPorts();
       const noOffersMessage = auPorts.flightDeals.ui.defaultMsgNoOffers;
       const messageElement = document.createElement('p');
       messageElement.textContent = noOffersMessage;
+      ul.innerHTML = '';
       block.appendChild(messageElement);
     }
   } catch (error) {
