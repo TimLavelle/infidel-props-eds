@@ -28,6 +28,10 @@ function createDealElement(offer, params, link) {
 
 function updateDeals(deals, block, params, link) {
   const ul = block.querySelector('ul') || document.createElement('ul');
+  const errorContainer = block.querySelector('.error-container');
+  if (errorContainer) {
+    block.removeChild(errorContainer);
+  }
   ul.innerHTML = ''; // Clear existing deals
   
   const fragment = document.createDocumentFragment();
@@ -49,10 +53,14 @@ async function fetchAndUpdateDeals(apiParams, block, params, link) {
       const ul = block.querySelector('ul') || document.createElement('ul');
       const auPorts = await fetchAuPorts();
       const noOffersMessage = auPorts.flightDeals.ui.defaultMsgNoOffers;
+      const errorContainer = document.createElement('div');
+      errorContainer.className = 'error-container';
       const messageElement = document.createElement('p');
-      messageElement.textContent = noOffersMessage;
+
       ul.innerHTML = '';
-      block.appendChild(messageElement);
+      messageElement.textContent = noOffersMessage;
+      errorContainer.appendChild(messageElement);
+      block.appendChild(errorContainer);
     }
   } catch (error) {
     console.error('Error fetching deals:', error);
