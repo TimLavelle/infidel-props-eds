@@ -14,7 +14,7 @@ function createDealElement(offer, params, link) {
   const { to, from } = route;
   const { symbol, amountFormatted } = price;
 
-  console.log(to);
+  console.log(to.name);
   
   const li = document.createElement('li');
   li.className = 'deal-item';
