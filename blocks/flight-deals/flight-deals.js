@@ -13,8 +13,6 @@ function createDealElement(offer, params, link) {
   const { showDealImages } = params;
   const { to, from } = route;
   const { symbol, amountFormatted } = price;
-
-  console.log(to.name);
   
   const li = document.createElement('li');
   li.className = 'deal-item';
@@ -27,7 +25,7 @@ function createDealElement(offer, params, link) {
       <a href="${link || deepLink}" aria-label="Flight deal to ${to.name}: ${formattedTravelClass} ${formattedTripType} from ${symbol}${amountFormatted}" tabindex="0">
         ${showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container"><img src="${flightImage}" alt="" role="presentation" class="flight-deal-image"></div>` : ''}
         ${sale.iconName ? `<span class="sale-badge" aria-hidden="true">${sale.iconName}</span>` : ''}
-        <p class="flight-title"><strong>${name}</strong></p>
+        <p class="flight-title"><strong>${to.name}</strong></p>
         <p class="flight-type">${formattedTravelClass} ${formattedTripType} from</p>
         <p class="price"><span class="price-currency" aria-hidden="true">${symbol}</span> ${amountFormatted}</p>
       </a>
