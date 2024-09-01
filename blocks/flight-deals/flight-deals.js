@@ -11,13 +11,21 @@ export default function decorate(block) {
         const li = document.createElement('li');
         moveInstrumentation(block, li);
         
-        Object.entries(offer).forEach(([key, value]) => {
-          if (typeof value === 'string' || typeof value === 'number') {
-            const p = document.createElement('p');
-            p.textContent = `${key}: ${value}`;
-            li.appendChild(p);
-          }
-        });
+        const p1 = document.createElement('p');
+        p1.textContent = `Destination: ${offer.route.to.name}`;
+        li.appendChild(p1);
+
+        const p2 = document.createElement('p');
+        p2.textContent = `Travel Class: ${offer.travelClass}`;
+        li.appendChild(p2);
+
+        const p3 = document.createElement('p');
+        p3.textContent = `Trip Type: ${offer.tripType}`;
+        li.appendChild(p3);
+
+        const p4 = document.createElement('p');
+        p4.textContent = `Fare Family: ${offer.fareFamily}`;
+        li.appendChild(p4);
         
         ul.appendChild(li);
       });
