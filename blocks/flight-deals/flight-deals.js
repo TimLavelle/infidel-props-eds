@@ -22,7 +22,7 @@ function createDealElement(offer, params, link) {
       </a>
     </div>
   `;
-  console.log(params);
+
   return li;
 }
 
