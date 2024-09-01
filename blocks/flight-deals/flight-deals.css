@@ -192,8 +192,7 @@
   
   .dropdown-container li:hover, .dropdown-container li:focus {
     background-color: #fff;
-    outline: 2px solid #007bff;
-    border-left: 5px solid #008080;
+    font-weight: 600;
   }
   
   .dropdown-container li[aria-selected="true"] {
