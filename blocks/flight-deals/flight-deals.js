@@ -9,12 +9,10 @@ async function fetchAuPorts() {
 }
 
 function createDealElement(offer, params, link) {
-  const { deepLink, route, travelClass, tripType, price, sale, to } = offer;
+  const { deepLink, route, travelClass, tripType, price, sale } = offer;
   const { showDealImages } = params;
-  const name = to?.name || 'Unknown Destination';
+  const { to, from } = route;
   const { symbol, amountFormatted } = price;
-
-  console.log(offer);
   
   const li = document.createElement('li');
   li.className = 'deal-item';
@@ -24,7 +22,7 @@ function createDealElement(offer, params, link) {
   
   li.innerHTML = `
     <div class="flight-deal-card">
-      <a href="${link || deepLink}" aria-label="Flight deal to ${name}: ${formattedTravelClass} ${formattedTripType} from ${symbol}${amountFormatted}" tabindex="0">
+      <a href="${link || deepLink}" aria-label="Flight deal to ${to.name}: ${formattedTravelClass} ${formattedTripType} from ${symbol}${amountFormatted}" tabindex="0">
         ${showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container"><img src="${flightImage}" alt="" role="presentation" class="flight-deal-image"></div>` : ''}
         ${sale.iconName ? `<span class="sale-badge" aria-hidden="true">${sale.iconName}</span>` : ''}
         <p class="flight-title"><strong>${name}</strong></p>
