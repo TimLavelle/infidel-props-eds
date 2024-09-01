@@ -31,8 +31,8 @@ export default async function decorate(block) {
 
   const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers';
   const dealsAPIParams = `?departureAirport=${params.fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
-  const flightImage = 'https://www.qantas.com/content/dam/qantas/destinations/australia/rottnest-island-western-australia.jpg/_jcr_content/renditions/article.tablet.small.jpg';
-  console.log(params.showDealImages);
+  const flightImage = 'https://tims-personal-stuff.s3.ap-southeast-2.amazonaws.com/poolside-beach-chairs-jamaica.jpg';
+  console.log(flightImage);
   try {
     const response = await fetch(dealsAPI + dealsAPIParams);
     const deals = await response.json();
