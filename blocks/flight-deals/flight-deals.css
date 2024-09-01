@@ -6,7 +6,6 @@
   width: calc(100% - 32px);
   max-width: 100%;
   position: relative;
-  margin: 0 auto;
   box-sizing: border-box;
 }
 
@@ -87,6 +86,7 @@
   font-size: .75rem;
   font-weight: 400;
   text-align: right;
+  margin: 0;
 }
 
 .flight-type::first-letter {
@@ -100,7 +100,7 @@
 }
 
 .price {
-  font-size: 28px;
+  font-size: 1.875rem;
   font-weight: bold;
   color: #e44;
   text-align: right;
