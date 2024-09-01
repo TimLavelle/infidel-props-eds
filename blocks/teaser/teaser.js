@@ -1,3 +1,5 @@
+import { addBlockClasses, removeUtilityElements } from '../../utils/blockUtils.js';
+
 export default async function decorate(block) {
 
   const childElements = [
@@ -16,21 +18,6 @@ export default async function decorate(block) {
     { key: 'ctaLinkTwoTitle', className: 'teaser-cta2-title' }
   ];
   
-  // Add the teaser classes to the child elements for styling
-  childElements.forEach(({ key, className }, index) => {
-    const teaserItem = block.children[index];
-    if (teaserItem) {
-      teaserItem.classList.add(className);
-      childElements[index].teaserItem = teaserItem;
-    } 
-  });
-
-  // Get rid of the selector block to show/hide the optional elements in the authoring dialogue
-  ['hasImage', 'hasCTA', 'imageLink'].forEach(key => {
-    if (childElements.find(item => item.key === key).teaserItem) {
-      childElements.find(item => item.key === key).teaserItem.remove();
-    }
-  });
-
-  
+  addBlockClasses(block, childElements);
+  removeUtilityElements(childElements, ['hasImage', 'hasCTA', 'imageLink']);
 }

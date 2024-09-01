@@ -334,6 +334,12 @@
         "valueType": "string"
       },
       {
+        "component": "boolean",
+        "label": "Show Deal Images",
+        "name": "showDealImages",
+        "valueType": "boolean"
+      },
+      {
         "component": "text",
         "name": "fromPort",
         "value": "",
