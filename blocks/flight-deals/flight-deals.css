@@ -18,7 +18,7 @@
   outline-offset: 2px;
 }
 
-.deals-container .flight-deals ul {
+.flight-deals .deals-container ul {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -28,7 +28,7 @@
   margin: 0;
 }
 
-.deals-container .flight-deals li {
+.flight-deals .deal-container li {
   flex: 1 1 calc(25% - 1rem);
   max-width: calc(25% - 1rem);
   padding: 0;
@@ -36,14 +36,14 @@
 }
 
 @media (max-width: 899px) {
-    .deals-container .flight-deals li {
+    .flight-deals .deal-container li {
     flex: 1 1 calc(33.33% - 1rem);
     max-width: calc(33.33% - 1rem);
   }
 }
 
 @media (max-width: 599px) {
-    .deals-container .flight-deals li {
+    .flight-deals .deal-container li {
     flex: 1 1 100%;
     max-width: 100%;
   }
@@ -51,11 +51,11 @@
 
 /* Flex grid layout for desktop */
 @media (min-width: 900px) {
-    .deals-container .flight-deals ul {
+    .flight-deals .deal-container ul {
     justify-content: flex-start;
   }
 
-  .deals-container .flight-deals li {
+  .flight-deals .deal-container li {
     flex: 0 1 calc(25% - 1rem);
     max-width: calc(25% - 1rem);
   }
