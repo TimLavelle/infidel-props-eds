@@ -13,6 +13,8 @@ function createDealElement(offer, params, link) {
   const { showDealImages } = params;
   const { to, from } = route;
   const { symbol, amountFormatted } = price;
+
+  console.log(to);
   
   const li = document.createElement('li');
   li.className = 'deal-item';
