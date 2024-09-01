@@ -1,6 +1,5 @@
 import { BlockUtils } from '../../utils/blockUtils.js';
 import { fetchAuPorts, fetchAndUpdateDeals } from '../../utils/dealUtils.js';
-import { attachDropdownEventListeners, addOutsideClickListener, handleDropdownButtonKeydown, handleDropdownOptionKeydown } from '../../utils/wcagUtils.js';
 
 export default async function decorate(block) {
   const childElements = [
@@ -51,6 +50,12 @@ export default async function decorate(block) {
   const listbox = titleElement.querySelector('#destination-listbox');
   const button = titleElement.querySelector('#destination-button');
 
+  const populateListbox = () => {
+    listbox.innerHTML = auPorts.flightDeals.model.departures.map(port => `
+      <li role="option" tabindex="-1" data-value="${port.cityCode}">${port.cityName}</li>
+    `).join('');
+  };
+
   const toggleDropdown = () => {
     const expanded = button.getAttribute('aria-expanded') === 'true';
     button.setAttribute('aria-expanded', !expanded);
@@ -73,41 +78,51 @@ export default async function decorate(block) {
     await fetchAndUpdateDeals(createDealsAPIParams(selectedCityCode), block, params);
     
     populateListbox();
-    attachDropdownEventListeners(button, listbox, toggleDropdown, selectOption, closeDropdown);
+    attachEventListeners();
   };
 
-  attachDropdownEventListeners(button, listbox, toggleDropdown, selectOption, closeDropdown);
-  addOutsideClickListener(titleElement, closeDropdown);
+  const handleButtonKeydown = (event) => {
+    if (['ArrowDown', 'Enter', ' '].includes(event.key)) {
+      event.preventDefault();
+      toggleDropdown();
+    } else if (event.key === 'Escape') {
+      closeDropdown();
+    }
+  };
 
-  const populateListbox = () => {
-    listbox.innerHTML = auPorts.flightDeals.model.departures.map(port => `
-      <li role="option" tabindex="-1" data-value="${port.cityCode}">${port.cityName}</li>
-    `).join('');
+  const handleOptionKeydown = (event) => {
+    const options = [...listbox.children];
+    const currentIndex = options.indexOf(event.target);
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        if (currentIndex < options.length - 1) options[currentIndex + 1].focus();
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        if (currentIndex > 0) options[currentIndex - 1].focus();
+        else { button.focus(); closeDropdown(); }
+        break;
+      case 'Enter':
+      case ' ':
+        event.preventDefault();
+        selectOption(event.target);
+        break;
+      case 'Escape':
+      case 'Tab':
+        button.focus();
+        closeDropdown();
+        break;
+    }
   };
 
   const attachEventListeners = () => {
     button.addEventListener('click', toggleDropdown);
-    button.addEventListener('keydown', (event) => handleDropdownButtonKeydown(event, toggleDropdown, closeDropdown));
+    button.addEventListener('keydown', handleButtonKeydown);
 
     listbox.querySelectorAll('li').forEach(option => {
       option.addEventListener('click', () => selectOption(option));
-      option.addEventListener('keydown', (event) => handleDropdownOptionKeydown(event, [...listbox.children], selectOption, closeDropdown, () => button.focus()));
-    });
-  };
-
-  const attachDropdownEventListeners = (button, listbox, toggleDropdown, selectOption, closeDropdown) => {
-    button.addEventListener('click', toggleDropdown);
-    button.addEventListener('keydown', (event) => handleDropdownButtonKeydown(event, toggleDropdown, closeDropdown));
-
-    listbox.querySelectorAll('li').forEach(option => {
-      option.addEventListener('click', () => selectOption(option));
-      option.addEventListener('keydown', (event) => handleDropdownOptionKeydown(event, [...listbox.children], selectOption, closeDropdown, () => button.focus()));
-    });
-  };
-
-  const addOutsideClickListener = (element, callback) => {
-    document.addEventListener('click', (event) => {
-      if (!element.contains(event.target)) callback();
+      option.addEventListener('keydown', handleOptionKeydown);
     });
   };
 
