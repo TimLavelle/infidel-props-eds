@@ -179,6 +179,16 @@
   .dropdown-container li {
     padding: 10px;
     cursor: pointer;
+    font-size: .75rem;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #d9d9d9;
+    border-right: 1px solid #d9d9d9;
+    min-height: 2.5rem;
+    padding: .875rem 1rem;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .dropdown-container li:hover, .dropdown-container li:focus {
