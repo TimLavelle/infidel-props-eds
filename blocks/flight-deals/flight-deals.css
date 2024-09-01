@@ -83,19 +83,28 @@
 }
 
 .flight-type {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 12px;
+  color: #323232;
+  font-size: .75rem;
+  font-weight: 400;
+  text-align: right;
 }
 
 .flight-type::first-letter {
   text-transform: capitalize;
 }
 
+.deals-title {
+  font-size: 1.375rem;
+  font-weight: 600;
+  margin: 0;
+}
+
 .price {
   font-size: 28px;
   font-weight: bold;
   color: #e44;
+  text-align: right;
+  margin: 0;
 }
 
 .price-currency {
