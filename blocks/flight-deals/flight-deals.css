@@ -97,14 +97,14 @@
   font-size: 1.375rem;
   font-weight: 600;
   margin: 0;
-  text-align: center;
+  text-align: left;
 }
 
 .deals-title {
   font-size: 1.375rem;
   font-weight: 600;
   margin: 0;
-  text-align: left;
+  text-align: center;
 }
 
 .price {
