@@ -17,6 +17,7 @@ export default async function decorate(block) {
 
   const fromPort = getTrimmedContent(childElements, 'fromPort');
   const showDisclaimers = getTrimmedContent(childElements, 'showDisclaimers');
+  console.log(fromPort);
 
   const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers?departureAirport=' + fromPort + '&includeDisclaimers=' + showDisclaimers + '&saleName=London%20and%20Paris%20Red%20Tail%20Sale&destination=CDG:ECONOMY&destination=LHR:ECONOMY';  
   const deals = await fetch(dealsAPI).then(res => res.json());
