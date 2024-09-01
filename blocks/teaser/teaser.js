@@ -1,4 +1,4 @@
-import { addBlockClasses, removeUtilityElements } from '../../utils/BlockUtils.js';
+import { BlockUtils } from '../../utils/blockUtils.js';
 
 export default async function decorate(block) {
 
@@ -18,6 +18,6 @@ export default async function decorate(block) {
     { key: 'ctaLinkTwoTitle', className: 'teaser-cta2-title' }
   ];
   
-  addBlockClasses(block, childElements);
-  removeUtilityElements(childElements, ['hasImage', 'hasCTA', 'imageLink']);
+  const blockUtils = new BlockUtils(block, childElements);
+  blockUtils.removeUtilityElements(['hasImage', 'hasCTA', 'imageLink']);
 }
