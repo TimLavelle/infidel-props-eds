@@ -36,14 +36,14 @@
 }
 
 @media (max-width: 899px) {
-  .flight-deals li {
+    .deals-container .flight-deals li {
     flex: 1 1 calc(33.33% - 1rem);
     max-width: calc(33.33% - 1rem);
   }
 }
 
 @media (max-width: 599px) {
-  .flight-deals li {
+    .deals-container .flight-deals li {
     flex: 1 1 100%;
     max-width: 100%;
   }
@@ -51,11 +51,11 @@
 
 /* Flex grid layout for desktop */
 @media (min-width: 900px) {
-  .flight-deals ul {
+    .deals-container .flight-deals ul {
     justify-content: flex-start;
   }
 
-  .flight-deals li {
+  .deals-container .flight-deals li {
     flex: 0 1 calc(25% - 1rem);
     max-width: calc(25% - 1rem);
   }
