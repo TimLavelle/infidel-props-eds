@@ -22,114 +22,86 @@ export default async function decorate(block) {
     return acc;
   }, {});
 
-  const destinationParams = params.toPorts?.split(',')
-    .map(toPort => `&destination=${toPort.trim()}:${params.travelClass}`)
-    .join('') || '';
-
-  const saleNameParams = params.saleName?.split(',')
-    .map(sale => `&saleName=${sale.trim()}`)
-    .join('') || '';
-
-  const createDealsAPIParams = (fromPort) => `?departureAirport=${fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
+  const createDealsAPIParams = (fromPort) => {
+    const destinationParams = params.toPorts?.split(',')
+      .map(toPort => `&destination=${toPort.trim()}:${params.travelClass}`)
+      .join('') || '';
+    const saleNameParams = params.saleName?.split(',')
+      .map(sale => `&saleName=${sale.trim()}`)
+      .join('') || '';
+    return `?departureAirport=${fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
+  };
 
   const auPorts = await fetchAuPorts();
   const titleElement = document.createElement('div');
   titleElement.className = 'deals-title-container dropdown-container';
 
   const selectedPort = auPorts.flightDeals.model.departures.find(port => port.cityCode === params.fromPort);
-  
-  const createListItem = (port) => {
-    const liListbox  = document.createElement('li');
-    liListbox.setAttribute('role', 'option');
-    liListbox.setAttribute('tabindex', '-1');
-    liListbox.dataset.value = port.cityCode;
-    liListbox.textContent = port.cityName;
-    return liListbox;
-  };
 
   titleElement.innerHTML = `
     <label for="destination-button" class="deals-title">${params.title}</label>
     <button id="destination-button" aria-haspopup="listbox" aria-expanded="false">
       ${selectedPort ? selectedPort.cityName : 'Select a city'}
-      <span class="dropdown-arrow">▼</span>
+      <span class="dropdown-arrow" aria-hidden="true">▼</span>
     </button>
     <ul id="destination-listbox" role="listbox" aria-label="Destination list"></ul>
   `;
 
   const listbox = titleElement.querySelector('#destination-listbox');
-  const populateListbox = () => {
-    listbox.innerHTML = '';
-    auPorts.flightDeals.model.departures.forEach(port => {
-      listbox.appendChild(createListItem(port));
-    });
-  };
-  populateListbox();
-
   const button = titleElement.querySelector('#destination-button');
-  let options = listbox.querySelectorAll('li');
 
-  function toggleDropdown() {
+  const populateListbox = () => {
+    listbox.innerHTML = auPorts.flightDeals.model.departures.map(port => `
+      <li role="option" tabindex="-1" data-value="${port.cityCode}">${port.cityName}</li>
+    `).join('');
+  };
+
+  const toggleDropdown = () => {
     const expanded = button.getAttribute('aria-expanded') === 'true';
     button.setAttribute('aria-expanded', !expanded);
     listbox.style.display = expanded ? 'none' : 'block';
-    if (!expanded) {
-      options[0].focus();
-    }
-  }
+    if (!expanded) listbox.querySelector('li').focus();
+  };
 
-  function closeDropdown() {
+  const closeDropdown = () => {
     button.setAttribute('aria-expanded', 'false');
     listbox.style.display = 'none';
-  }
+  };
 
-  async function selectOption(option) {
+  const selectOption = async (option) => {
     const selectedCityCode = option.dataset.value;
-    button.textContent = option.textContent;
-    button.appendChild(createDropdownArrow());
+    button.innerHTML = `${option.textContent}<span class="dropdown-arrow" aria-hidden="true">▼</span>`;
     button.focus();
     closeDropdown();
 
     params.fromPort = selectedCityCode;
-    const newDealsAPIParams = createDealsAPIParams(selectedCityCode);
-    await fetchAndUpdateDeals(newDealsAPIParams, block, params);
+    await fetchAndUpdateDeals(createDealsAPIParams(selectedCityCode), block, params);
     
-    // Repopulate the listbox and update options
     populateListbox();
-    options = listbox.querySelectorAll('li');
     attachEventListeners();
-  }
+  };
 
-  function handleButtonKeydown(event) {
-    switch (event.key) {
-      case 'ArrowDown':
-      case 'Enter':
-      case ' ':
-        event.preventDefault();
-        toggleDropdown();
-        break;
-      case 'Escape':
-        closeDropdown();
-        break;
+  const handleButtonKeydown = (event) => {
+    if (['ArrowDown', 'Enter', ' '].includes(event.key)) {
+      event.preventDefault();
+      toggleDropdown();
+    } else if (event.key === 'Escape') {
+      closeDropdown();
     }
-  }
+  };
 
-  function handleOptionKeydown(event) {
-    const currentIndex = Array.from(options).indexOf(event.target);
+  const handleOptionKeydown = (event) => {
+    const options = [...listbox.children];
+    const currentIndex = options.indexOf(event.target);
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
-        if (currentIndex < options.length - 1) {
-          options[currentIndex + 1].focus();
-        }
+        if (currentIndex < options.length - 1) options[currentIndex + 1].focus();
         break;
       case 'ArrowUp':
         event.preventDefault();
-        if (currentIndex > 0) {
-          options[currentIndex - 1].focus();
-        } else {
-          button.focus();
-          closeDropdown();
-        }
+        if (currentIndex > 0) options[currentIndex - 1].focus();
+        else { button.focus(); closeDropdown(); }
         break;
       case 'Enter':
       case ' ':
@@ -137,44 +109,29 @@ export default async function decorate(block) {
         selectOption(event.target);
         break;
       case 'Escape':
+      case 'Tab':
         button.focus();
         closeDropdown();
         break;
-      case 'Tab':
-        closeDropdown();
-        break;
     }
-  }
+  };
 
-  function createDropdownArrow() {
-    const arrow = document.createElement('span');
-    arrow.className = 'dropdown-arrow';
-    arrow.setAttribute('aria-hidden', 'true');
-    arrow.textContent = '▼';
-    return arrow;
-  }
-
-  function attachEventListeners() {
-    button.removeEventListener('click', toggleDropdown);
-    button.removeEventListener('keydown', handleButtonKeydown);
+  const attachEventListeners = () => {
     button.addEventListener('click', toggleDropdown);
     button.addEventListener('keydown', handleButtonKeydown);
 
-    options.forEach(option => {
-      option.removeEventListener('click', () => selectOption(option));
-      option.removeEventListener('keydown', handleOptionKeydown);
+    listbox.querySelectorAll('li').forEach(option => {
       option.addEventListener('click', () => selectOption(option));
       option.addEventListener('keydown', handleOptionKeydown);
     });
-  }
-
-  attachEventListeners();
+  };
 
   document.addEventListener('click', (event) => {
-    if (!button.contains(event.target) && !listbox.contains(event.target)) {
-      closeDropdown();
-    }
+    if (!titleElement.contains(event.target)) closeDropdown();
   });
+
+  populateListbox();
+  attachEventListeners();
 
   block.insertBefore(titleElement, block.firstChild);
   
@@ -182,6 +139,5 @@ export default async function decorate(block) {
   dealsContainer.className = 'deals-container';
   block.appendChild(dealsContainer);
   
-  const initialDealsAPIParams = createDealsAPIParams(params.fromPort);
-  await fetchAndUpdateDeals(initialDealsAPIParams, dealsContainer, params);
+  await fetchAndUpdateDeals(createDealsAPIParams(params.fromPort), dealsContainer, params);
 }
