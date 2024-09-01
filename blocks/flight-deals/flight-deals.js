@@ -45,11 +45,14 @@ export default async function decorate(block) {
 
     deals.offers.forEach(offer => {
       const li = document.createElement('li');
+      const container = li.querySelector('.flight-deal-card');
+      const containerWidth = container ? container.offsetWidth : 750; 
+      const optimizedPic = createOptimizedPicture(flightImage, 'Flight Deal Image', false, [{ width: containerWidth.toString() }]);
       li.className = 'deal-item';
       li.innerHTML = `
         <div class="flight-deal-card">
           <a href="${link}" aria-label="Flight deal to ${offer.route.to.name}: ${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from ${offer.price.symbol}${offer.price.amountFormatted}" tabindex="0">
-            ${params.showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container"><img src="${flightImage}" alt="" role="presentation" class="flight-deal-image"></div>` : ''}
+            ${params.showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container">${optimizedPic}</div>` : ''}
             ${offer.sale.iconName !== '' ? `<span class="sale-badge" aria-hidden="true">${offer.sale.iconName}</span>` : ''}
             <p class="flight-title"><strong>${offer.route.to.name}</strong></p>
             <p class="flight-type">${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from</p>
