@@ -28,7 +28,7 @@
 
 /* Flex grid layout for desktop */
 @media (min-width: 900px) {
-  .flight-deals ul .deal-item {
+  .flight-deals ul {
     justify-content: flex-start;
   }
 
