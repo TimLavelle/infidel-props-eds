@@ -43,11 +43,11 @@ export default async function decorate(block) {
       const li = document.createElement('li');
       li.className = 'deal-item';
       li.innerHTML = `
-        <div class="deal-item-content">
-          ${offer.sale && typeof offer.sale === 'object' ? `<p>${offer.sale.iconName}</p>` : ''}
-          <p><strong>${offer.route.to.name}</strong></p>
-          <p class="deal-item-type">${offer.travelClass} ${offer.tripType} from</p>
-          <p>${offer.price.symbol} ${offer.price.amountFormatted}</p>
+        <div class="flight-deal-card">
+          ${offer.sale && typeof offer.sale === 'object' ? `<span class="sale-badge">${offer.sale.iconName}</span>` : ''}
+          <p class="${childElements.find(item => item.key === 'title').className}"><strong>${offer.route.to.name}</strong></p>
+          <p class="flight-type">${offer.travelClass} ${offer.tripType} from</p>
+          <p class="price"><span class="price-currency">${offer.price.symbol}</span> ${offer.price.amountFormatted}</p>
         </div>
       `;
       fragment.appendChild(li);
