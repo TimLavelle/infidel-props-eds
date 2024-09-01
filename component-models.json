@@ -334,15 +334,24 @@
         "valueType": "string"
       },
       {
-        "component": "multiselect",
-        "name": "showFlightImages",
-        "label": "Show Flight Images",
+        "component": "text",
+        "name": "fromPort",
+        "value": "",
+        "label": "Departure Port",
         "valueType": "string",
+        "required": true
+      },
+      {
+        "component": "text",
+        "name": "travelClass",
+        "value": "",
+        "label": "Travel Class",
+        "valueType": "string",
+        "required": true,
         "options": [
-          {
-            "name": "Show",
-            "value": "show"
-          }
+          {"name": "Economy", "value": "ECONOMY"},
+          {"name": "Business", "value": "BUSINESS"},
+          {"name": "First", "value": "FIRST"}
         ]
       }
     ]
