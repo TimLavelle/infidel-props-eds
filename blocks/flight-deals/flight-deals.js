@@ -13,9 +13,9 @@ export default async function decorate(block) {
   ];
 
   const blockUtils = new BlockUtils(block, childElements);
-  blockUtils.removeUtilityElements(['showDealImages', 'showDisclaimers', 'saleName', 'fromPort', 'travelClass', 'toPorts']);
+  blockUtils.removeUtilityElements(['showDealImages', 'showDisclaimers', 'saleName', 'fromPort', 'travelClass', 'toPorts', 'title']);
 
-  const fields = ['fromPort', 'showDisclaimers', 'saleName', 'toPorts', 'travelClass', 'showDealImages'];
+  const fields = ['fromPort', 'showDisclaimers', 'saleName', 'toPorts', 'travelClass', 'showDealImages', 'title'];
   const params = fields.reduce((acc, key) => {
     const value = blockUtils.getTrimmedContent(key);
     if (value) acc[key] = value;
