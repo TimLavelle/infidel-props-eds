@@ -46,7 +46,7 @@ export default async function decorate(block) {
       li.className = 'deal-item';
       li.innerHTML = `
         <div class="flight-deal-card">
-          ${params.showDealImages === 'true' ? `<img src="${flightImage}" alt="Flight Deal Image" class="flight-deal-image">` : ''}
+          ${params.showDealImages === 'true' ? `<div class="flight-deal-image-container"><img src="${flightImage}" alt="Flight Deal Image" class="flight-deal-image"></div>` : ''}
           ${offer.sale.iconName !== '' ? `<span class="sale-badge">${offer.sale.iconName}</span>` : ''}
           <p class="flight-title"><strong>${offer.route.to.name}</strong></p>
           <p class="flight-type">${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from</p>
