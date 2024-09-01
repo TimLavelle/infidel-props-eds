@@ -9,9 +9,9 @@ async function fetchAuPorts() {
 }
 
 function createDealElement(offer, params, link) {
-  const { deepLink, route, travelClass, tripType, price, sale } = offer;
+  const { deepLink, route, travelClass, tripType, price, sale, to } = offer;
   const { showDealImages } = params;
-  const { to, name } = route;
+  const { code, name } = to;
   const { symbol, amountFormatted } = price;
   
   const li = document.createElement('li');
