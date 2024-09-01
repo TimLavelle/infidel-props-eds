@@ -9,18 +9,18 @@ export default async function decorate(block) {
     { key: 'showDealImages', className: 'deals-show-deal-images' },
     { key: 'fromPort', className: 'deals-from-port' },
     { key: 'travelClass', className: 'deals-travel-class' },
+    { key: 'saleName', className: 'deals-sale-name' },
     { key: 'showDisclaimers', className: 'deals-show-disclaimers' }
   ];
 
   addBlockClasses(block, childElements);
-  removeUtilityElements(childElements, ['fromPort', 'travelClass', 'showDealImages', 'showDisclaimers']);
+  removeUtilityElements(childElements, ['fromPort', 'travelClass', 'showDealImages', 'showDisclaimers', 'saleName']);
 
-  const fromPort = getTrimmedContent(childElements, 'fromPort');
-  const showDisclaimers = getTrimmedContent(childElements, 'showDisclaimers');
-  console.log('Port = ' + fromPort);
-  console.log('Disclaimers = ' + showDisclaimers);
+  const { fromPort, showDisclaimers, saleName } = Object.fromEntries(
+    ['fromPort', 'showDisclaimers', 'saleName'].map(key => [key, getTrimmedContent(childElements, key)])
+  );
 
-  // const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers?departureAirport=' + fromPort + '&includeDisclaimers=' + showDisclaimers + '&saleName=London%20and%20Paris%20Red%20Tail%20Sale&destination=CDG:ECONOMY&destination=LHR:ECONOMY';  
+  const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers?departureAirport=' + fromPort + '&includeDisclaimers=' + showDisclaimers + '&saleName=' + saleName + '&destination=CDG:ECONOMY&destination=LHR:ECONOMY';  
   const deals = await fetch(dealsAPI).then(res => res.json());
 
   const ul = document.createElement('ul');

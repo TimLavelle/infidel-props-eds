@@ -361,6 +361,14 @@
         ]
       },
       {
+        "component": "text",
+        "name": "saleName",
+        "value": "",
+        "label": "Sale Name",
+        "valueType": "string",
+        "required": false
+      },
+      {
         "component": "boolean",
         "label": "Show Disclaimers",
         "name": "showDisclaimers",
