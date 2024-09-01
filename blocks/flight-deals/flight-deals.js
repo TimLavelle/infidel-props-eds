@@ -6,14 +6,14 @@ export default async function decorate(block) {
 
   const childElements = [
     { key: 'title', className: 'deals-title' },
+    { key: 'showDealImages', className: 'deals-show-deal-images' },
     { key: 'fromPort', className: 'deals-from-port' },
     { key: 'travelClass', className: 'deals-travel-class' },
-    { key: 'showDealImages', className: 'deals-show-deal-images' },
     { key: 'showDisclaimers', className: 'deals-show-disclaimers' }
   ];
 
   addBlockClasses(block, childElements);
-  // removeUtilityElements(childElements, ['fromPort', 'travelClass', 'showDealImages', 'showDisclaimers']);
+  removeUtilityElements(childElements, ['fromPort', 'travelClass', 'showDealImages', 'showDisclaimers']);
 
   const fromPort = getTrimmedContent(childElements, 'fromPort');
   const showDisclaimers = getTrimmedContent(childElements, 'showDisclaimers');
@@ -41,4 +41,5 @@ export default async function decorate(block) {
 
   ul.innerHTML = dealsItems;
   block.append(ul);
+
 }
