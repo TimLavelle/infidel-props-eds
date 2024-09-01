@@ -61,6 +61,9 @@
   font-size: 14px;
   color: #666;
   margin-bottom: 12px;
+}
+
+.flight-type::first-letter {
   text-transform: capitalize;
 }
 
