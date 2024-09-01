@@ -7,11 +7,6 @@ async function fetchAuPorts() {
   return response.json();
 }
 
-async function getCityName(cityCode, auPorts) {
-  const departure = auPorts.flightDeals.model.departures.find(dep => dep.cityCode === cityCode);
-  return departure ? departure.cityName : cityCode;
-}
-
 function createDealElement(offer, params, link) {
   const li = document.createElement('li');
   li.className = 'deal-item';
@@ -26,6 +21,7 @@ function createDealElement(offer, params, link) {
       </a>
     </div>
   `;
+  console.log(params);
   return li;
 }
 
@@ -81,8 +77,7 @@ export default async function decorate(block) {
     .map(sale => `&saleName=${sale.trim()}`)
     .join('') || '';
 
-  const createDealsAPIParams = (fromPort) => 
-    `?departureAirport=${fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
+  const createDealsAPIParams = (fromPort) => `?departureAirport=${fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
 
   const auPorts = await fetchAuPorts();
   const titleElement = document.createElement('div');
