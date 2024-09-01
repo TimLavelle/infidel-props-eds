@@ -1,14 +1,39 @@
 .flight-deal-card {
-  font-family: Arial, sans-serif;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 16px;
-  width: 100%;
-  max-width: 100%;
   width: calc(100% - 32px);
+  max-width: 100%;
   position: relative;
   margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.flight-deals ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.flight-deals li {
+  flex: 1 1 calc(25% - 1rem);
+  max-width: calc(25% - 1rem);
+}
+
+@media (max-width: 899px) {
+  .flight-deals li {
+    flex: 1 1 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 599px) {
+  .flight-deals li {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
 }
 
 .flight-deals ul {
