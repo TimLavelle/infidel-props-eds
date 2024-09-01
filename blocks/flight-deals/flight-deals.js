@@ -1,6 +1,4 @@
-import { addBlockClasses, removeUtilityElements, getTrimmedContent } from '../../utils/blockUtils.js';
-import { createOptimizedPicture, decorateButtons } from '../../scripts/aem.js';
-import { moveInstrumentation } from '../../scripts/scripts.js';
+import { BlockUtils } from './utils/BlockUtils';
 
 export default async function decorate(block) {
 
@@ -13,11 +11,10 @@ export default async function decorate(block) {
     { key: 'showDisclaimers', className: 'deals-show-disclaimers' }
   ];
 
-  addBlockClasses(block, childElements);
-  removeUtilityElements(childElements, ['fromPort', 'travelClass', 'showDealImages', 'showDisclaimers', 'saleName']);
+  const blockUtils = new BlockUtils(block, childElements);
 
   const { fromPort, showDisclaimers, saleName } = Object.fromEntries(
-    ['fromPort', 'showDisclaimers', 'saleName'].map(key => [key, getTrimmedContent(childElements, key)])
+    ['fromPort', 'showDisclaimers', 'saleName'].map(key => [key, blockUtils.getTrimmedContent(key)])
   );
 
   const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers?departureAirport=' + fromPort + '&includeDisclaimers=' + showDisclaimers + '&saleName=' + saleName + '&destination=CDG:ECONOMY&destination=LHR:ECONOMY';  
