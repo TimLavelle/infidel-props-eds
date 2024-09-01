@@ -32,7 +32,9 @@ export default async function decorate(block) {
 
   const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers';
   const dealsAPIParams = `?departureAirport=${params.fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
+
   const flightImage = 'https://tims-personal-stuff.s3.ap-southeast-2.amazonaws.com/poolside-beach-chairs-jamaica.jpg';
+  const link = 'https://www.qantas.com/au/en/flight-deals/flights-from-sydney-to-ballina-byron.html/syd/bnk/economy?int_cam=au:en:flight-deals-home-page:flight-deals-hp:en:nn';
   
   try {
     const response = await fetch(dealsAPI + dealsAPIParams);
@@ -46,11 +48,13 @@ export default async function decorate(block) {
       li.className = 'deal-item';
       li.innerHTML = `
         <div class="flight-deal-card">
-          ${params.showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container"><img src="${flightImage}" alt="Flight Deal Image" class="flight-deal-image"></div>` : ''}
-          ${offer.sale.iconName !== '' ? `<span class="sale-badge">${offer.sale.iconName}</span>` : ''}
-          <p class="flight-title"><strong>${offer.route.to.name}</strong></p>
-          <p class="flight-type">${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from</p>
-          <p class="price"><span class="price-currency">${offer.price.symbol}</span> ${offer.price.amountFormatted}</p>
+          <a href="${link}" aria-label="Flight deal to ${offer.route.to.name}: ${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from ${offer.price.symbol}${offer.price.amountFormatted}" tabindex="0">
+            ${params.showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container"><img src="${flightImage}" alt="" role="presentation" class="flight-deal-image"></div>` : ''}
+            ${offer.sale.iconName !== '' ? `<span class="sale-badge" aria-hidden="true">${offer.sale.iconName}</span>` : ''}
+            <p class="flight-title"><strong>${offer.route.to.name}</strong></p>
+            <p class="flight-type">${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from</p>
+            <p class="price"><span class="price-currency" aria-hidden="true">${offer.price.symbol}</span> ${offer.price.amountFormatted}</p>
+          </a>
         </div>
       `;
       fragment.appendChild(li);

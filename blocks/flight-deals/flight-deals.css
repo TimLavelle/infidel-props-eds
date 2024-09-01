@@ -128,7 +128,7 @@
 .price {
   font-size: 1.875rem;
   font-weight: bold;
-  color: #d00; /* Changed from #e44 for better contrast */
+  color: #d00;
   text-align: right;
   margin: 0;
 }
@@ -150,7 +150,7 @@ textarea:focus {
 
 /* Accessibility: Ensure proper color contrast for all text */
 body {
-  color: #333; /* Ensure this contrasts well with your background colors */
+  color: #333; 
 }
 
 /* Accessibility: Add styles for skip-to-content link */
