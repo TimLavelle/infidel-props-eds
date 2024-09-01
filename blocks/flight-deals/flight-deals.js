@@ -35,7 +35,7 @@ export default async function decorate(block) {
 
   // Construct the API URL with the processed destination parameters
   const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers';
-  const dealsAPIParams = `departureAirport=${fromPort}&includeDisclaimers=${showDisclaimers}${saleNameParams}${destinationParams}`;
+  const dealsAPIParams = `?departureAirport=${fromPort}&includeDisclaimers=${showDisclaimers}${saleNameParams}${destinationParams}`;
   const deals = await fetch(dealsAPI + dealsAPIParams).then(res => res.json());
 
   const ul = document.createElement('ul');
