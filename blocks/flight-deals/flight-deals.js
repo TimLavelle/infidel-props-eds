@@ -57,7 +57,7 @@ export default async function decorate(block) {
       li.innerHTML = `
         <div class="flight-deal-card">
           <a href="${link}" aria-label="Flight deal to ${offer.route.to.name}: ${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from ${offer.price.symbol}${offer.price.amountFormatted}" tabindex="0">
-            ${params.showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container">${optimizedPic}</div>` : ''}
+            ${params.showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container">${optimizedPic.outerHTML}</div>` : ''}
             ${offer.sale.iconName !== '' ? `<span class="sale-badge" aria-hidden="true">${offer.sale.iconName}</span>` : ''}
             <p class="flight-title"><strong>${offer.route.to.name}</strong></p>
             <p class="flight-type">${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from</p>
