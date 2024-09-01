@@ -5,6 +5,7 @@ export class BlockUtils {
     this.addBlockClasses();
   }
 
+  /* Add classes to the block and its child elements for better styling */
   addBlockClasses() {
     if (!this.childElements || this.childElements.length === 0) {
       return;
@@ -18,6 +19,7 @@ export class BlockUtils {
     });
   }
 
+  /* Remove utility elements that are not needed for presentation */
   removeUtilityElements(keysToRemove) {
     keysToRemove.forEach(key => {
       const item = this.childElements.find(item => item.key === key);
@@ -27,6 +29,7 @@ export class BlockUtils {
     });
   }
 
+  /* Get the trimmed content of a child element */
   getTrimmedContent(key) {
     const item = this.childElements.find(item => item.key === key);
     return item && item.blockItem ? item.blockItem.textContent.trim() : null;
