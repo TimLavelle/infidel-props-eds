@@ -144,12 +144,12 @@
     font-family: Arial, sans-serif;
   }
   
-  label {
+  .dropdown-container label {
     display: block;
     margin-bottom: 5px;
   }
   
-  button {
+  .dropdown-containerbutton {
     width: 100%;
     padding: 10px;
     background-color: #fff;
@@ -158,11 +158,11 @@
     cursor: pointer;
   }
   
-  .dropdown-arrow {
+  .dropdown-container.dropdown-arrow {
     float: right;
   }
   
-  ul {
+  .dropdown-container ul {
     display: none;
     position: absolute;
     width: 100%;
@@ -175,15 +175,15 @@
     background-color: #fff;
   }
   
-  li {
+  .dropdown-container li {
     padding: 10px;
     cursor: pointer;
   }
   
-  li:hover, li:focus {
+  .dropdown-container li:hover, .dropdown-container li:focus {
     background-color: #f0f0f0;
   }
   
-  li[aria-selected="true"] {
+  .dropdown-container li[aria-selected="true"] {
     background-color: #e0e0e0;
   }
