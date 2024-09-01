@@ -45,7 +45,7 @@ export default async function decorate(block) {
       li.innerHTML = `
         <div class="flight-deal-card">
           ${offer.sale.iconName !== '' ? `<span class="sale-badge">${offer.sale.iconName}</span>` : ''}
-          <p class="${childElements.find(item => item.key === 'title').className}"><strong>${offer.route.to.name}</strong></p>
+          <p class="flight-title"><strong>${offer.route.to.name}</strong></p>
           <p class="flight-type">${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from</p>
           <p class="price"><span class="price-currency">${offer.price.symbol}</span> ${offer.price.amountFormatted}</p>
         </div>

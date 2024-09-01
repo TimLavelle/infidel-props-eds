@@ -93,10 +93,18 @@
   text-transform: capitalize;
 }
 
+.flight-title {
+  font-size: 1.375rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}
+
 .deals-title {
   font-size: 1.375rem;
   font-weight: 600;
   margin: 0;
+  text-align: left;
 }
 
 .price {
