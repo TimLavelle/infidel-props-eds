@@ -86,8 +86,13 @@ export default async function decorate(block) {
 
   block.insertBefore(titleElement, block.firstChild);
   
+  // Create a separate container for deals
+  const dealsContainer = document.createElement('div');
+  dealsContainer.className = 'deals-container';
+  block.appendChild(dealsContainer);
+  
   const initialDealsAPIParams = createDealsAPIParams(params.fromPort);
-  await fetchAndUpdateDeals(initialDealsAPIParams, block, params);
+  await fetchAndUpdateDeals(initialDealsAPIParams, dealsContainer, params);
 
   document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementById('destination-button');
