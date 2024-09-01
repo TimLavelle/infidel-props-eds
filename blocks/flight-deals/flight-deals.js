@@ -57,12 +57,16 @@ export default async function decorate(block) {
   `;
 
   const listbox = titleElement.querySelector('#destination-listbox');
-  auPorts.flightDeals.model.departures.forEach(port => {
-    listbox.appendChild(createListItem(port));
-  });
+  const populateListbox = () => {
+    listbox.innerHTML = '';
+    auPorts.flightDeals.model.departures.forEach(port => {
+      listbox.appendChild(createListItem(port));
+    });
+  };
+  populateListbox();
 
   const button = titleElement.querySelector('#destination-button');
-  const options = listbox.querySelectorAll('li');
+  let options = listbox.querySelectorAll('li');
 
   function toggleDropdown() {
     const expanded = button.getAttribute('aria-expanded') === 'true';
@@ -88,6 +92,11 @@ export default async function decorate(block) {
     params.fromPort = selectedCityCode;
     const newDealsAPIParams = createDealsAPIParams(selectedCityCode);
     await fetchAndUpdateDeals(newDealsAPIParams, block, params);
+    
+    // Repopulate the listbox and update options
+    populateListbox();
+    options = listbox.querySelectorAll('li');
+    attachEventListeners();
   }
 
   function handleButtonKeydown(event) {
@@ -145,13 +154,21 @@ export default async function decorate(block) {
     return arrow;
   }
 
-  button.addEventListener('click', toggleDropdown);
-  button.addEventListener('keydown', handleButtonKeydown);
+  function attachEventListeners() {
+    button.removeEventListener('click', toggleDropdown);
+    button.removeEventListener('keydown', handleButtonKeydown);
+    button.addEventListener('click', toggleDropdown);
+    button.addEventListener('keydown', handleButtonKeydown);
 
-  options.forEach(option => {
-    option.addEventListener('click', () => selectOption(option));
-    option.addEventListener('keydown', handleOptionKeydown);
-  });
+    options.forEach(option => {
+      option.removeEventListener('click', () => selectOption(option));
+      option.removeEventListener('keydown', handleOptionKeydown);
+      option.addEventListener('click', () => selectOption(option));
+      option.addEventListener('keydown', handleOptionKeydown);
+    });
+  }
+
+  attachEventListeners();
 
   document.addEventListener('click', (event) => {
     if (!button.contains(event.target) && !listbox.contains(event.target)) {
