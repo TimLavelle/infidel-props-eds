@@ -61,7 +61,7 @@ export async function fetchAndUpdateDeals(apiParams, block, params, link) {
       errorContainer.className = 'error-container';
       errorContainer.innerHTML = `<p>${noOffersMessage}</p>`;
       
-      block.querySelector('ul')?.remove();
+      block.querySelector('.deals-container')?.remove();
       block.appendChild(errorContainer);
     }
   } catch (error) {
