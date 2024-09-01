@@ -9,7 +9,21 @@ export default async function decorate(block) {
   let dealsItems = '';
 
   deals.offers.forEach(offer => {
-    dealsItems += `<li>${offer.route.to.name}</li>`;
+    dealsItems += `
+      <li>
+        <div class="deal-item">
+          <div class="deal-item-image">
+            ${createOptimizedPicture(offer.images[0], 'deal-item-image', false, true)}
+          </div>
+          <div class="deal-item-content">
+            ${offer.sale && typeof offer.sale === 'object' && offer.sale.name ? `<p>${offer.sale.name}</p>` : ''}
+            <p><strong>${offer.route.from.name}</strong></p>
+            <p class="deal-item-type">${offer.travelClass + offer.tripType} from</p>
+            <p>${offer.price.symbol} ${offer.price.amountFormatted}</p>
+          </div>
+        </div>
+      </li>
+    `;
   });
 
   ul.innerHTML = dealsItems;
