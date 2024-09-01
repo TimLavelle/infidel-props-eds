@@ -5,6 +5,7 @@ export function addBlockClasses(block, childElements) {
         blockItem.classList.add(className);
         childElements[index].blockItem = blockItem;
         childElements[index].trimmedContent = blockItem.textContent.trim();
+        console.log(childElements[index].trimmedContent);
       } 
     });
   }
