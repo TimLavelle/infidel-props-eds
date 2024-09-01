@@ -10,6 +10,12 @@ async function fetchAuPorts() {
   return response.json();
 }
 
+async function getCityName(cityCode) {
+  const auPorts = await fetchAuPorts();
+  const departure = auPorts.flightDeals.model.departures.find(dep => dep.cityCode === cityCode);
+  return departure ? departure.cityName : cityCode;
+}
+
 export default async function decorate(block) {
   const childElements = [
     { key: 'title', className: 'deals-title' },
@@ -31,29 +37,47 @@ export default async function decorate(block) {
     return acc;
   }, {});
 
+  // Creating the loop of the destination params
   const destinationParams = params.toPorts?.split(',')
     .map(toPort => `&destination=${toPort.trim()}:${params.travelClass}`)
     .join('') || '';
 
+  // creating the sale name params
   const saleNameParams = params.saleName?.split(',')
     .map(sale => `&saleName=${sale.trim()}`)
     .join('') || '';
 
+  // creating the deals API params
   const dealsAPIParams = `?departureAirport=${params.fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
 
-  const getCityName = async (cityCode) => {
-    const auPorts = await fetchAuPorts();
-    const departure = auPorts.flightDeals.model.departures.find(dep => dep.cityCode === cityCode);
-    return departure ? departure.cityName : cityCode;
-  };
-
-  // Create and insert title element
   const cityName = await getCityName(params.fromPort);
   const titleElement = document.createElement('div');
   titleElement.className = 'deals-title-container';
   titleElement.innerHTML = `
-    <p class="deals-title">${params.title} ${cityName}</p>
+    <p class="deals-title">${params.title}</p>
+    <select id="citySelector" aria-label="Select departure city">
+      ${(await fetchAuPorts()).flightDeals.model.departures.map(port => `
+        <option value="${port.cityCode}" ${port.cityCode === params.fromPort ? 'selected' : ''}>
+          ${port.cityName}
+        </option>
+      `).join('')}
+    </select>
   `;
+
+  const citySelector = titleElement.querySelector('#citySelector');
+  citySelector.addEventListener('change', async (event) => {
+    const selectedCityCode = event.target.value;
+    params.fromPort = selectedCityCode;
+    const newDealsAPIParams = `?departureAirport=${selectedCityCode}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
+    
+    try {
+      const response = await fetch(dealsAPI + newDealsAPIParams);
+      const newDeals = await response.json();
+      updateDeals(newDeals, block, params);
+    } catch (error) {
+      console.error('Error fetching new deals:', error);
+    }
+  });
   block.insertBefore(titleElement, block.firstChild);
   
   try {
