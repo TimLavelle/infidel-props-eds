@@ -28,6 +28,7 @@ export default function decorate(block) {
         li.appendChild(p4);
         
         ul.appendChild(li);
+        console.log(offer);
       });
     })
     .catch(error => {
