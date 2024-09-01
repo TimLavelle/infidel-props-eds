@@ -50,7 +50,6 @@ async function fetchAndUpdateDeals(apiParams, block, params, link) {
       const noOffersMessage = auPorts.flightDeals.ui.defaultMsgNoOffers;
       const messageElement = document.createElement('p');
       messageElement.textContent = noOffersMessage;
-      block.innerHTML = '';
       block.appendChild(messageElement);
     }
   } catch (error) {
