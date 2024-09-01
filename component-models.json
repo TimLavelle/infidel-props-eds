@@ -359,7 +359,13 @@
           {"name": "Business", "value": "BUSINESS"},
           {"name": "First", "value": "FIRST"}
         ]
-      }
+      },
+      {
+        "component": "boolean",
+        "label": "Show Disclaimers",
+        "name": "showDisclaimers",
+        "valueType": "boolean"
+      },
     ]
   }
 ]
