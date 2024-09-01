@@ -4,6 +4,7 @@ export function addBlockClasses(block, childElements) {
       if (blockItem) {
         blockItem.classList.add(className);
         childElements[index].blockItem = blockItem;
+        childElements[index].trimmedContent = blockItem.textContent.trim();
       } 
     });
   }
@@ -15,4 +16,9 @@ export function addBlockClasses(block, childElements) {
         item.blockItem.remove();
       }
     });
+  }
+
+  export function getTrimmedContent(childElements, key) {
+    const item = childElements.find(item => item.key === key);
+    return item ? item.trimmedContent : null;
   }

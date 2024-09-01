@@ -1,4 +1,4 @@
-import { addBlockClasses, removeUtilityElements } from '../../utils/blockUtils.js';
+import { addBlockClasses, removeUtilityElements, getTrimmedContent } from '../../utils/blockUtils.js';
 import { createOptimizedPicture, decorateButtons } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
@@ -15,9 +15,9 @@ export default async function decorate(block) {
   addBlockClasses(block, childElements);
   removeUtilityElements(childElements, ['fromPort', 'travelClass', 'showDealImages', 'showDisclaimers']);
 
-  const fromPort = block.querySelector('.deals-from-port').textContent;
-  const showDisclaimers = block.querySelector('.deals-show-disclaimers').textContent;
-  
+  const fromPort = getTrimmedContent(childElements, 'fromPort');
+  const showDisclaimers = getTrimmedContent(childElements, 'showDisclaimers');
+
   const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers?departureAirport=' + fromPort + '&includeDisclaimers=' + showDisclaimers + '&saleName=London%20and%20Paris%20Red%20Tail%20Sale&destination=CDG:ECONOMY&destination=LHR:ECONOMY';  
   const deals = await fetch(dealsAPI).then(res => res.json());
 
