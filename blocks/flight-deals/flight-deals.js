@@ -1,6 +1,7 @@
 import { BlockUtils } from '../../utils/blockUtils.js';
 
 const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers';
+const flightImage = 'https://tims-personal-stuff.s3.ap-southeast-2.amazonaws.com/poolside-beach-chairs-jamaica.jpg';
 
 async function fetchAuPorts() {
   const response = await fetch('../../utils/resources/auPorts.json');
@@ -13,7 +14,7 @@ function createDealElement(offer, params, link) {
   li.innerHTML = `
     <div class="flight-deal-card">
       <a href="${link || offer.deepLink}" aria-label="Flight deal to ${offer.route.to.name}: ${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from ${offer.price.symbol}${offer.price.amountFormatted}" tabindex="0">
-        ${params.showDealImages === 'true' && offer.flightImage ? `<div class="flight-deal-image-container"><img src="${offer.flightImage}" alt="" role="presentation" class="flight-deal-image"></div>` : ''}
+        ${params.showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container"><img src="${flightImage}" alt="" role="presentation" class="flight-deal-image"></div>` : ''}
         ${offer.sale.iconName !== '' ? `<span class="sale-badge" aria-hidden="true">${offer.sale.iconName}</span>` : ''}
         <p class="flight-title"><strong>${offer.route.to.name}</strong></p>
         <p class="flight-type">${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from</p>
