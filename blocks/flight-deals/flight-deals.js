@@ -60,15 +60,16 @@ export default async function decorate(block) {
       `;
       fragment.appendChild(li);
     });
-
-    ul.appendChild(fragment);
-    block.appendChild(ul);
-
+    
     if (params.showDealImages === 'true' && flightImage) {
       li.querySelector('.flight-deal-image-container').appendChild(
         createResponsiveImage(flightImage, '', 'flight-deal-image')
       );
     }
+
+    ul.appendChild(fragment);
+    block.appendChild(ul);
+
   } catch (error) {
     console.error('Error fetching deals:', error);
   }
