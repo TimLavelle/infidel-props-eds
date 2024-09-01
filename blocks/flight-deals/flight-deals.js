@@ -9,16 +9,25 @@ async function fetchAuPorts() {
 }
 
 function createDealElement(offer, params, link) {
+  const { deepLink, route, travelClass, tripType, price, sale } = offer;
+  const { showDealImages } = params;
+  const { to, name } = route;
+  const { symbol, amountFormatted } = price;
+  
   const li = document.createElement('li');
   li.className = 'deal-item';
+  
+  const formattedTripType = tripType.toLowerCase().replace(/_/g, ' ');
+  const formattedTravelClass = travelClass.toLowerCase();
+  
   li.innerHTML = `
     <div class="flight-deal-card">
-      <a href="${link || offer.deepLink}" aria-label="Flight deal to ${offer.route.to.name}: ${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from ${offer.price.symbol}${offer.price.amountFormatted}" tabindex="0">
-        ${params.showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container"><img src="${flightImage}" alt="" role="presentation" class="flight-deal-image"></div>` : ''}
-        ${offer.sale.iconName !== '' ? `<span class="sale-badge" aria-hidden="true">${offer.sale.iconName}</span>` : ''}
-        <p class="flight-title"><strong>${offer.route.to.name}</strong></p>
-        <p class="flight-type">${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from</p>
-        <p class="price"><span class="price-currency" aria-hidden="true">${offer.price.symbol}</span> ${offer.price.amountFormatted}</p>
+      <a href="${link || deepLink}" aria-label="Flight deal to ${name}: ${formattedTravelClass} ${formattedTripType} from ${symbol}${amountFormatted}" tabindex="0">
+        ${showDealImages === 'true' && flightImage ? `<div class="flight-deal-image-container"><img src="${flightImage}" alt="" role="presentation" class="flight-deal-image"></div>` : ''}
+        ${sale.iconName ? `<span class="sale-badge" aria-hidden="true">${sale.iconName}</span>` : ''}
+        <p class="flight-title"><strong>${name}</strong></p>
+        <p class="flight-type">${formattedTravelClass} ${formattedTripType} from</p>
+        <p class="price"><span class="price-currency" aria-hidden="true">${symbol}</span> ${amountFormatted}</p>
       </a>
     </div>
   `;
@@ -28,16 +37,10 @@ function createDealElement(offer, params, link) {
 
 function updateDeals(deals, block, params, link) {
   const ul = block.querySelector('ul') || document.createElement('ul');
-  const errorContainer = block.querySelector('.error-container');
-  if (errorContainer) {
-    block.removeChild(errorContainer);
-  }
-  ul.innerHTML = ''; // Clear existing deals
+  ul.innerHTML = '';
   
   const fragment = document.createDocumentFragment();
-  deals.offers.forEach(offer => {
-    fragment.appendChild(createDealElement(offer, params, link));
-  });
+  deals.offers.forEach(offer => fragment.appendChild(createDealElement(offer, params, link)));
   
   ul.appendChild(fragment);
   if (!block.contains(ul)) block.appendChild(ul);
@@ -45,21 +48,22 @@ function updateDeals(deals, block, params, link) {
 
 async function fetchAndUpdateDeals(apiParams, block, params, link) {
   try {
+    block.querySelectorAll('.error-container').forEach(container => container.remove());
+
     const response = await fetch(dealsAPI + apiParams);
     const deals = await response.json();
+
     if (deals.offers && deals.offers.length > 0) {
       updateDeals(deals, block, params, link);
     } else {
-      const ul = block.querySelector('ul') || document.createElement('ul');
       const auPorts = await fetchAuPorts();
       const noOffersMessage = auPorts.flightDeals.ui.defaultMsgNoOffers;
+      
       const errorContainer = document.createElement('div');
       errorContainer.className = 'error-container';
-      const messageElement = document.createElement('p');
-
-      ul.innerHTML = '';
-      messageElement.textContent = noOffersMessage;
-      errorContainer.appendChild(messageElement);
+      errorContainer.innerHTML = `<p>${noOffersMessage}</p>`;
+      
+      block.querySelector('ul')?.remove();
       block.appendChild(errorContainer);
     }
   } catch (error) {
