@@ -12,6 +12,7 @@ export default async function decorate(block) {
   ];
 
   const blockUtils = new BlockUtils(block, childElements);
+  blockUtils.removeUtilityElements(['showDealImages', 'showDisclaimers', 'saleName', 'fromPort', 'travelClass']);
 
   const { fromPort, showDisclaimers, saleName } = Object.fromEntries(
     ['fromPort', 'showDisclaimers', 'saleName'].map(key => [key, blockUtils.getTrimmedContent(key)])
