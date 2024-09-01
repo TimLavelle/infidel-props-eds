@@ -342,7 +342,7 @@
         "required": true
       },
       {
-        "component": "text",
+        "component": "select",
         "name": "travelClass",
         "value": "",
         "label": "Travel Class",
