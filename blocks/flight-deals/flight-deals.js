@@ -1,6 +1,8 @@
-import { BlockUtils } from './utils/BlockUtils';
+import { BlockUtils } from '../../utils/BlockUtils.js';
 
 export default async function decorate(block) {
+  console.log('flight-deals decorate function called');
+  console.log('block:', block);
 
   const childElements = [
     { key: 'title', className: 'deals-title' },
@@ -11,7 +13,10 @@ export default async function decorate(block) {
     { key: 'showDisclaimers', className: 'deals-show-disclaimers' }
   ];
 
+  console.log('childElements:', childElements);
+
   const blockUtils = new BlockUtils(block, childElements);
+  console.log('BlockUtils instance created');
 
   const { fromPort, showDisclaimers, saleName } = Object.fromEntries(
     ['fromPort', 'showDisclaimers', 'saleName'].map(key => [key, blockUtils.getTrimmedContent(key)])

@@ -1,4 +1,4 @@
-import { addBlockClasses, removeUtilityElements } from '../../utils/blockUtils.js';
+import { addBlockClasses, removeUtilityElements } from '../../utils/BlockUtils.js';
 
 export default async function decorate(block) {
 
