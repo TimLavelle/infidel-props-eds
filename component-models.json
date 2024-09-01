@@ -322,5 +322,29 @@
         ]
       }
     ]
+  },
+  {
+    "id": "flightDeals",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "value": "Latest flights from Sydney",
+        "label": "Title",
+        "valueType": "string"
+      },
+      {
+        "component": "multiselect",
+        "name": "showFlightImages",
+        "label": "Show Flight Images",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Show",
+            "value": "show"
+          }
+        ]
+      }
+    ]
   }
 ]
