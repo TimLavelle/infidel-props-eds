@@ -45,8 +45,8 @@ export default async function decorate(block) {
     dealsItems += `
       <li class="deal-item">
         <div class="deal-item-content">
-          ${offer.sale && typeof offer.sale === 'object' && offer.sale.name ? `<p>${offer.sale.name}</p>` : ''}
-          <p><strong>${offer.route.from.name}</strong></p>
+          ${offer.sale && typeof offer.sale === 'object' && offer.sale.iconCode === 'sale' ? `<p>Sale</p>` : '<p>Deal</p>'}
+          <p><strong>${offer.route.to.name}</strong></p>
           <p class="deal-item-type">${offer.travelClass + ' ' + offer.tripType} from</p>
           <p>${offer.price.symbol} ${offer.price.amountFormatted}</p>
         </div>
