@@ -1,4 +1,4 @@
-import { BlockUtils } from '../../utils/BlockUtils.js';
+import { BlockUtils } from '../../utils/blockUtils.js';
 
 export default async function decorate(block) {
   console.log('flight-deals decorate function called');
