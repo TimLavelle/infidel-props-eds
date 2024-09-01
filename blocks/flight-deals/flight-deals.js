@@ -43,7 +43,16 @@ async function fetchAndUpdateDeals(apiParams, block, params, link) {
   try {
     const response = await fetch(dealsAPI + apiParams);
     const deals = await response.json();
-    updateDeals(deals, block, params, link);
+    if (deals.offers && deals.offers.length > 0) {
+      updateDeals(deals, block, params, link);
+    } else {
+      const auPorts = await fetchAuPorts();
+      const noOffersMessage = auPorts.flightDeals.ui.defaultMsgNoOffers;
+      const messageElement = document.createElement('p');
+      messageElement.textContent = noOffersMessage;
+      block.innerHTML = '';
+      block.appendChild(messageElement);
+    }
   } catch (error) {
     console.error('Error fetching deals:', error);
   }
