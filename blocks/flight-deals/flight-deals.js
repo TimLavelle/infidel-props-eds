@@ -13,12 +13,14 @@ export default async function decorate(block) {
   ];
 
   const blockUtils = new BlockUtils(block, childElements);
-  blockUtils.removeUtilityElements(['showDealImages', 'showDisclaimers', 'saleName', 'fromPort', 'travelClass']);
+  blockUtils.removeUtilityElements(['showDealImages', 'showDisclaimers', 'saleName', 'fromPort', 'travelClass', 'toPorts']);
 
   const { fromPort, showDisclaimers, saleName } = Object.fromEntries(
     ['fromPort', 'showDisclaimers', 'saleName'].map(key => [key, blockUtils.getTrimmedContent(key)])
   );
-  // console.log(toPorts);
+  console.log(toPorts);
+
+  
 
   const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers?departureAirport=' + fromPort + '&includeDisclaimers=' + showDisclaimers + '&saleName=' + saleName + '&destination=CDG:ECONOMY&destination=LHR:ECONOMY';  
   const deals = await fetch(dealsAPI).then(res => res.json());
