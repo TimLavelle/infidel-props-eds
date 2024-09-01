@@ -45,6 +45,17 @@
   --grid-width-m: 900px;
   --grid-width-l: 1200px;
   --grid-width-xl: 1800px;
+
+  /* Card Styles */
+  --card-border-radius: 4px;
+  --card-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --card-padding: 1rem;
+  --card-width: calc(100%);
+  --card-max-width: 100%;
+  --card-position: relative;
+  --card-box-sizing: border-box;
+  --card-display: flex;
+  --card-flex-direction: column;
 }
 
 @font-face {

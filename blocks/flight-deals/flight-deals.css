@@ -1,14 +1,14 @@
 .flight-deal-card {
   background-color: white;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  width: calc(100%);
-  max-width: 100%;
-  position: relative;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow);
+  padding: var(--card-padding);
+  width: var(--card-width);
+  max-width: var(--card-max-width);
+  position: var(--card-position);
+  box-sizing: var(--card-box-sizing);
+  display: var(--card-display);
+  flex-direction: var(--card-flex-direction);
 }
 
 .flight-deals ul {
@@ -69,6 +69,7 @@
   height: auto;
   margin: -1rem -1rem 1rem -1rem;
   object-fit: cover;
+  border-radius: var(--card-border-radius);
 }
 
 .sale-badge {
