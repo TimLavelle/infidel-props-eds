@@ -32,7 +32,7 @@ export default async function decorate(block) {
   const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers';
   const dealsAPIParams = `?departureAirport=${params.fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
   const flightImage = 'https://www.qantas.com/content/dam/qantas/destinations/australia/rottnest-island-western-australia.jpg/_jcr_content/renditions/article.tablet.small.jpg';
-  
+  console.log(params.showDealImages);
   try {
     const response = await fetch(dealsAPI + dealsAPIParams);
     const deals = await response.json();
@@ -45,7 +45,7 @@ export default async function decorate(block) {
       li.className = 'deal-item';
       li.innerHTML = `
         <div class="flight-deal-card">
-          ${params.showDealImages === true && flightImage !== '' ? `<img src="${flightImage}" alt="Flight Deal Image" class="flight-deal-image">` : ''}
+          ${params.showDealImages === true && flightImage ? `<img src="${flightImage}" alt="Flight Deal Image" class="flight-deal-image">` : ''}
           ${offer.sale.iconName !== '' ? `<span class="sale-badge">${offer.sale.iconName}</span>` : ''}
           <p class="flight-title"><strong>${offer.route.to.name}</strong></p>
           <p class="flight-type">${offer.travelClass.toLowerCase()} ${offer.tripType.toLowerCase().replace(/_/g, ' ')} from</p>
