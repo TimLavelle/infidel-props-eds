@@ -61,6 +61,7 @@
   font-size: 14px;
   color: #666;
   margin-bottom: 12px;
+  text-transform: capitalize;
 }
 
 .price {
