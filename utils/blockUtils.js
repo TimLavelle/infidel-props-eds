@@ -15,14 +15,14 @@ export default class BlockUtils {
       if (blockItem) {
         blockItem.classList.add(className);
         this.childElements[index].blockItem = blockItem;
-      } 
+      }
     });
   }
 
   /* Remove utility elements that are not needed for presentation */
   removeUtilityElements(keysToRemove) {
-    keysToRemove.forEach(key => {
-      const item = this.childElements.find(item => item.key === key);
+    keysToRemove.forEach((key) => {
+      const item = this.childElements.find((item) => item.key === key);
       if (item && item.blockItem) {
         item.blockItem.remove();
       }
@@ -31,7 +31,7 @@ export default class BlockUtils {
 
   /* Get the trimmed content of a child element */
   getTrimmedContent(key) {
-    const item = this.childElements.find(item => item.key === key);
+    const item = this.childElements.find((item) => item.key === key);
     return item && item.blockItem ? item.blockItem.textContent.trim() : null;
   }
 }
