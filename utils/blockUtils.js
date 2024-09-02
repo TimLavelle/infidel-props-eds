@@ -22,7 +22,9 @@ export default class BlockUtils {
   /* Remove utility elements that are not needed for presentation */
   removeUtilityElements(keysToRemove) {
     keysToRemove.forEach((keyToRemove) => {
-      const utilityItem = this.childElements.find((childElement) => childElement.key === keyToRemove);
+      const utilityItem = this.childElements.find(
+        (childElement) => childElement.key === keyToRemove
+      );
       if (utilityItem && utilityItem.blockItem) {
         utilityItem.blockItem.remove();
       }
