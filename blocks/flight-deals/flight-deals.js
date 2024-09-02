@@ -24,13 +24,11 @@ export default async function decorate(block) {
 
   const createDealsAPIParams = (fromPort) => {
     const destinationParams = params.toPorts?.split(',')
-      /* eslint-disable arrow-parens */
-      .map(toPort => `&destination=${toPort.trim()}:${params.travelClass}`)
+      .map((toPort) => `&destination=${toPort.trim()}:${params.travelClass}`)
       .join('') || '';
     const saleNameParams = params.saleName?.split(',')
-      .map(sale => `&saleName=${sale.trim()}`)
+      .map((sale) => `&saleName=${sale.trim()}`)
       .join('') || '';
-      /* eslint-enable arrow-parens */
     return `?departureAirport=${fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
   };
 
@@ -38,7 +36,9 @@ export default async function decorate(block) {
   const titleElement = document.createElement('div');
   titleElement.className = 'deals-title-container dropdown-container';
 
-  const selectedPort = auPorts.flightDeals.model.departures.find((port) => port.cityCode === params.fromPort);
+  const selectedPort = auPorts.flightDeals.model.departures.find(
+    (port) => port.cityCode === params.fromPort
+  );
 
   titleElement.innerHTML = `
     <label for="destination-button" class="deals-title">${params.title}</label>
@@ -53,9 +53,19 @@ export default async function decorate(block) {
   const button = titleElement.querySelector('#destination-button');
 
   const populateListbox = () => {
-    listbox.innerHTML = auPorts.flightDeals.model.departures.map(port => `
+    listbox.innerHTML = auPorts.flightDeals.model.departures.map((port) => `
       <li role="option" tabindex="-1" data-value="${port.cityCode}">${port.cityName}</li>
     `).join('');
+  };
+
+  const attachEventListeners = () => {
+    button.addEventListener('click', toggleDropdown);
+    button.addEventListener('keydown', handleButtonKeydown);
+
+    listbox.querySelectorAll('li').forEach(option => {
+      option.addEventListener('click', () => selectOption(option));
+      option.addEventListener('keydown', handleOptionKeydown);
+    });
   };
 
   const toggleDropdown = () => {
@@ -78,7 +88,7 @@ export default async function decorate(block) {
 
     params.fromPort = selectedCityCode;
     await fetchAndUpdateDeals(createDealsAPIParams(selectedCityCode), block, params);
-    
+
     populateListbox();
     attachEventListeners();
   };
@@ -116,16 +126,6 @@ export default async function decorate(block) {
         closeDropdown();
         break;
     }
-  };
-
-  const attachEventListeners = () => {
-    button.addEventListener('click', toggleDropdown);
-    button.addEventListener('keydown', handleButtonKeydown);
-
-    listbox.querySelectorAll('li').forEach(option => {
-      option.addEventListener('click', () => selectOption(option));
-      option.addEventListener('keydown', handleOptionKeydown);
-    });
   };
 
   document.addEventListener('click', (event) => {
