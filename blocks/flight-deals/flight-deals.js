@@ -58,16 +58,6 @@ export default async function decorate(block) {
     `).join('');
   };
 
-  const attachEventListeners = () => {
-    button.addEventListener('click', toggleDropdown);
-    button.addEventListener('keydown', handleButtonKeydown);
-
-    listbox.querySelectorAll('li').forEach(option => {
-      option.addEventListener('click', () => selectOption(option));
-      option.addEventListener('keydown', handleOptionKeydown);
-    });
-  };
-
   const toggleDropdown = () => {
     const expanded = button.getAttribute('aria-expanded') === 'true';
     button.setAttribute('aria-expanded', !expanded);
@@ -78,6 +68,25 @@ export default async function decorate(block) {
   const closeDropdown = () => {
     button.setAttribute('aria-expanded', 'false');
     listbox.style.display = 'none';
+  };
+
+  const handleButtonKeydown = (event) => {
+    if (['ArrowDown', 'Enter', ' '].includes(event.key)) {
+      event.preventDefault();
+      toggleDropdown();
+    } else if (event.key === 'Escape') {
+      closeDropdown();
+    }
+  };
+
+  const attachEventListeners = () => {
+    button.addEventListener('click', toggleDropdown);
+    button.addEventListener('keydown', handleButtonKeydown);
+
+    listbox.querySelectorAll('li').forEach(option => {
+      option.addEventListener('click', () => selectOption(option));
+      option.addEventListener('keydown', handleOptionKeydown);
+    });
   };
 
   const selectOption = async (option) => {
@@ -91,15 +100,6 @@ export default async function decorate(block) {
 
     populateListbox();
     attachEventListeners();
-  };
-
-  const handleButtonKeydown = (event) => {
-    if (['ArrowDown', 'Enter', ' '].includes(event.key)) {
-      event.preventDefault();
-      toggleDropdown();
-    } else if (event.key === 'Escape') {
-      closeDropdown();
-    }
   };
 
   const handleOptionKeydown = (event) => {
