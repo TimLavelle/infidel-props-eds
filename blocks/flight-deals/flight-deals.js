@@ -9,7 +9,7 @@ export default async function decorate(block) {
     { key: 'toPorts', className: 'deals-to-ports' },
     { key: 'travelClass', className: 'deals-travel-class' },
     { key: 'saleName', className: 'deals-sale-name' },
-    { key: 'showDisclaimers', className: 'deals-show-disclaimers' }
+    { key: 'showDisclaimers', className: 'deals-show-disclaimers' },
   ];
 
   const blockUtils = new BlockUtils(block, childElements);
@@ -24,11 +24,13 @@ export default async function decorate(block) {
 
   const createDealsAPIParams = (fromPort) => {
     const destinationParams = params.toPorts?.split(',')
+      /* eslint-disable arrow-parens */
       .map(toPort => `&destination=${toPort.trim()}:${params.travelClass}`)
       .join('') || '';
     const saleNameParams = params.saleName?.split(',')
       .map(sale => `&saleName=${sale.trim()}`)
       .join('') || '';
+      /* eslint-enable arrow-parens */
     return `?departureAirport=${fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
   };
 
