@@ -11,13 +11,13 @@ export function createDealElement(offer, params, link) {
   const { showDealImages } = params;
   const { to } = route;
   const { symbol, amountFormatted } = price;
-  
+
   const li = document.createElement('li');
   li.className = 'deal-item';
-  
+
   const formattedTripType = tripType.toLowerCase().replace(/_/g, ' ');
   const formattedTravelClass = travelClass.toLowerCase();
-  
+
   li.innerHTML = `
     <div class="flight-deal-card">
       <a href="${link || deepLink}" aria-label="Flight deal to ${to.name}: ${formattedTravelClass} ${formattedTripType} from ${symbol}${amountFormatted}" tabindex="0">
@@ -36,10 +36,10 @@ export function createDealElement(offer, params, link) {
 export function updateDeals(deals, block, params, link) {
   const ul = block.querySelector('.deals-container ul') || document.createElement('ul');
   ul.innerHTML = '';
-  
+
   const fragment = document.createDocumentFragment();
   deals.offers.forEach(offer => fragment.appendChild(createDealElement(offer, params, link)));
-  
+
   if (!block.querySelector('.deals-container')) {
     const dealsContainer = document.createElement('div');
     dealsContainer.className = 'deals-container';
@@ -64,11 +64,11 @@ export async function fetchAndUpdateDeals(apiParams, block, params, link) {
     } else {
       const auPorts = await fetchAuPorts();
       const noOffersMessage = auPorts.flightDeals.ui.defaultMsgNoOffers;
-      
+
       const errorContainer = document.createElement('div');
       errorContainer.className = 'error-container';
       errorContainer.innerHTML = `<p>${noOffersMessage}</p>`;
-      
+
       block.querySelector('.deals-container')?.remove();
       block.appendChild(errorContainer);
     }

@@ -21,17 +21,17 @@ export default class BlockUtils {
 
   /* Remove utility elements that are not needed for presentation */
   removeUtilityElements(keysToRemove) {
-    keysToRemove.forEach((key) => {
-      const item = this.childElements.find((item) => item.key === key);
-      if (item && item.blockItem) {
-        item.blockItem.remove();
+    keysToRemove.forEach((keyToRemove) => {
+      const utilityItem = this.childElements.find((childElement) => childElement.key === keyToRemove);
+      if (utilityItem && utilityItem.blockItem) {
+        utilityItem.blockItem.remove();
       }
     });
   }
 
   /* Get the trimmed content of a child element */
-  getTrimmedContent(key) {
-    const item = this.childElements.find((item) => item.key === key);
-    return item && item.blockItem ? item.blockItem.textContent.trim() : null;
+  getTrimmedContent(contentKey) {
+    const contentItem = this.childElements.find((childElement) => childElement.key === contentKey);
+    return contentItem && contentItem.blockItem ? contentItem.blockItem.textContent.trim() : null;
   }
 }
