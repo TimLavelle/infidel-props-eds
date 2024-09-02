@@ -127,6 +127,11 @@ export default async function decorate(block) {
         button.focus();
         closeDropdown();
         break;
+      default:
+        event.preventDefault();
+        button.focus();
+        closeDropdown();
+        break;
     }
   };
 
