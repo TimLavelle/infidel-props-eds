@@ -7,7 +7,6 @@ export async function fetchAuPorts() {
 }
 
 export function createDealElement(offer, params, link) {
-
   const { deepLink, route, travelClass, tripType, price, sale } = offer;
 
   const { showDealImages } = params;
