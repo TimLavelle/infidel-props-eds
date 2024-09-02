@@ -37,7 +37,7 @@ export default async function decorate(block) {
   titleElement.className = 'deals-title-container dropdown-container';
 
   const selectedPort = auPorts.flightDeals.model.departures.find(
-    (port) => port.cityCode === params.fromPort
+    (port) => port.cityCode === params.fromPort,
   );
 
   titleElement.innerHTML = `
@@ -83,9 +83,11 @@ export default async function decorate(block) {
     button.addEventListener('click', toggleDropdown);
     button.addEventListener('keydown', handleButtonKeydown);
 
-    listbox.querySelectorAll('li').forEach(option => {
+    listbox.querySelectorAll('li').forEach((option) => {
+      /* eslint-disable no-use-before-define */
       option.addEventListener('click', () => selectOption(option));
       option.addEventListener('keydown', handleOptionKeydown);
+      /* eslint-enable no-use-before-define */
     });
   };
 
@@ -136,10 +138,10 @@ export default async function decorate(block) {
   attachEventListeners();
 
   block.insertBefore(titleElement, block.firstChild);
-  
+
   const dealsContainer = document.createElement('div');
   dealsContainer.className = 'deals-container';
   block.appendChild(dealsContainer);
-  
+
   await fetchAndUpdateDeals(createDealsAPIParams(params.fromPort), dealsContainer, params);
 }
