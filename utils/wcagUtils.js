@@ -14,8 +14,6 @@ export function handleDropdownOptionKeydown(
 ) {
   const currentIndex = options.indexOf(event.target);
   switch (event.key) {
-    default:
-      break;
     case 'ArrowDown':
       event.preventDefault();
       if (currentIndex < options.length - 1) options[currentIndex + 1].focus();
@@ -34,6 +32,8 @@ export function handleDropdownOptionKeydown(
     case 'Tab':
       focusButton();
       closeDropdown();
+      break;
+    default:
       break;
   }
 }
