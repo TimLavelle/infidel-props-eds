@@ -10,7 +10,7 @@ export function handleDropdownButtonKeydown(event, toggleDropdown, closeDropdown
 export function handleDropdownOptionKeydown(
   event,
   options,
-  { selectOption, closeDropdown, focusButton }
+  { selectOption, closeDropdown, focusButton },
 ) {
   const currentIndex = options.indexOf(event.target);
   switch (event.key) {
@@ -40,7 +40,7 @@ export function attachDropdownEventListeners(button, listbox, toggleDropdown, se
   button.addEventListener('click', toggleDropdown);
   button.addEventListener('keydown', (event) => handleDropdownButtonKeydown(event, toggleDropdown, closeDropdown));
 
-  listbox.querySelectorAll('li').forEach(option => {
+  listbox.querySelectorAll('li').forEach((option) => {
     option.addEventListener('click', () => selectOption(option));
     option.addEventListener('keydown', (event) => handleDropdownOptionKeydown(event, [...listbox.children], {
       selectOption,
