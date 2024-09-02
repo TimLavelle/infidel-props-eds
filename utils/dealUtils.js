@@ -7,17 +7,10 @@ export async function fetchAuPorts() {
 }
 
 export function createDealElement(offer, params, link) {
-  const { deepLink, route, travelClass, tripType, price, sale } 
-  = offer;
-  const { showDealImages } 
-  = params;
-
-  const { to } 
-  = route;
-
-  const { symbol, amountFormatted } 
-  = price;
-
+  const { deepLink, route, travelClass, tripType, price, sale } = offer;
+  const { showDealImages } = params;
+  const { to } = route;
+  const { symbol, amountFormatted } = price;
   const li = document.createElement('li');
   li.className = 'deal-item';
 
