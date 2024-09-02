@@ -38,7 +38,7 @@ export default async function decorate(block) {
   const titleElement = document.createElement('div');
   titleElement.className = 'deals-title-container dropdown-container';
 
-  const selectedPort = auPorts.flightDeals.model.departures.find(port => port.cityCode === params.fromPort);
+  const selectedPort = auPorts.flightDeals.model.departures.find((port) => port.cityCode === params.fromPort);
 
   titleElement.innerHTML = `
     <label for="destination-button" class="deals-title">${params.title}</label>
