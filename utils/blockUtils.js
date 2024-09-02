@@ -23,7 +23,7 @@ export default class BlockUtils {
   removeUtilityElements(keysToRemove) {
     keysToRemove.forEach((keyToRemove) => {
       const utilityItem = this.childElements.find(
-        (childElement) => childElement.key === keyToRemove
+        (childElement) => childElement.key === keyToRemove,
       );
       if (utilityItem && utilityItem.blockItem) {
         utilityItem.blockItem.remove();

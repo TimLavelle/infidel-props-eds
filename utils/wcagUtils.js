@@ -6,8 +6,12 @@ export function handleDropdownButtonKeydown(event, toggleDropdown, closeDropdown
     closeDropdown();
   }
 }
-  
-export function handleDropdownOptionKeydown(event, options, selectOption, closeDropdown, focusButton) {
+
+export function handleDropdownOptionKeydown(
+  event,
+  options,
+  { selectOption, closeDropdown, focusButton }
+) {
   const currentIndex = options.indexOf(event.target);
   switch (event.key) {
     case 'ArrowDown':
@@ -38,7 +42,11 @@ export function attachDropdownEventListeners(button, listbox, toggleDropdown, se
 
   listbox.querySelectorAll('li').forEach(option => {
     option.addEventListener('click', () => selectOption(option));
-    option.addEventListener('keydown', (event) => handleDropdownOptionKeydown(event, [...listbox.children], selectOption, closeDropdown, () => button.focus()));
+    option.addEventListener('keydown', (event) => handleDropdownOptionKeydown(event, [...listbox.children], {
+      selectOption,
+      closeDropdown,
+      focusButton: () => button.focus(),
+    }));
   });
 }
 

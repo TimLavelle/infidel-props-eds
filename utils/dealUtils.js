@@ -8,8 +8,11 @@ export async function fetchAuPorts() {
 
 export function createDealElement(offer, params, link) {
   const { deepLink, route, travelClass, tripType, price, sale } = offer;
+
   const { showDealImages } = params;
+
   const { to } = route;
+
   const { symbol, amountFormatted } = price;
 
   const li = document.createElement('li');
@@ -38,7 +41,7 @@ export function updateDeals(deals, block, params, link) {
   ul.innerHTML = '';
 
   const fragment = document.createDocumentFragment();
-  deals.offers.forEach(offer => fragment.appendChild(createDealElement(offer, params, link)));
+  deals.offers.forEach((offer) => fragment.appendChild(createDealElement(offer, params, link)));
 
   if (!block.querySelector('.deals-container')) {
     const dealsContainer = document.createElement('div');
@@ -54,7 +57,7 @@ export function updateDeals(deals, block, params, link) {
 
 export async function fetchAndUpdateDeals(apiParams, block, params, link) {
   try {
-    block.querySelectorAll('.error-container').forEach(container => container.remove());
+    block.querySelectorAll('.error-container').forEach((container) => container.remove());
 
     const response = await fetch(dealsAPI + apiParams);
     const deals = await response.json();
