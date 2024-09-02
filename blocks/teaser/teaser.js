@@ -1,7 +1,6 @@
 import { BlockUtils } from '../../utils/blockUtils.js';
 
 export default async function decorate(block) {
-
   const childElements = [
     { key: 'title', className: 'teaser-title' },
     { key: 'imageLink', className: 'teaser-img-link' },
@@ -15,9 +14,9 @@ export default async function decorate(block) {
     { key: 'ctaLinkOneTitle', className: 'teaser-cta1-title' },
     { key: 'ctaLinkTwo', className: 'teaser-ctas' },
     { key: 'ctaLinkTwoText', className: 'teaser-cta2-text' },
-    { key: 'ctaLinkTwoTitle', className: 'teaser-cta2-title' }
+    { key: 'ctaLinkTwoTitle', className: 'teaser-cta2-title' },
   ];
-  
+
   const blockUtils = new BlockUtils(block, childElements);
   blockUtils.removeUtilityElements(['hasImage', 'hasCTA', 'imageLink']);
 }

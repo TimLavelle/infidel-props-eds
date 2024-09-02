@@ -1,4 +1,4 @@
-export class BlockUtils {
+export default class BlockUtils {
   constructor(block, childElements) {
     this.block = block;
     this.childElements = childElements;
@@ -10,7 +10,7 @@ export class BlockUtils {
     if (!this.childElements || this.childElements.length === 0) {
       return;
     }
-    this.childElements.forEach(({ key, className }, index) => {
+    this.childElements.forEach(({ className }, index) => {
       const blockItem = this.block.children[index];
       if (blockItem) {
         blockItem.classList.add(className);
