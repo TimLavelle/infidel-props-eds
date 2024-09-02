@@ -14,6 +14,8 @@ export function handleDropdownOptionKeydown(
 ) {
   const currentIndex = options.indexOf(event.target);
   switch (event.key) {
+    default:
+      break;
     case 'ArrowDown':
       event.preventDefault();
       if (currentIndex < options.length - 1) options[currentIndex + 1].focus();
@@ -36,7 +38,9 @@ export function handleDropdownOptionKeydown(
   }
 }
 
+/* eslint-disable max-len */
 export function attachDropdownEventListeners(button, listbox, toggleDropdown, selectOption, closeDropdown) {
+/* eslint-enable max-len */
   button.addEventListener('click', toggleDropdown);
   button.addEventListener('keydown', (event) => handleDropdownButtonKeydown(event, toggleDropdown, closeDropdown));
 
