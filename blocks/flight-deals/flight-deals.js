@@ -1,4 +1,4 @@
-import { BlockUtils } from '../../utils/blockUtils.js';
+import BlockUtils from '../../utils/blockUtils.js';
 import { fetchAuPorts, fetchAndUpdateDeals } from '../../utils/dealUtils.js';
 
 export default async function decorate(block) {
