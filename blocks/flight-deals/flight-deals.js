@@ -1,5 +1,6 @@
 import BlockUtils from '../../utils/blockUtils.js';
 import { fetchAuPorts, fetchAndUpdateDeals } from '../../utils/dealUtils.js';
+import { readBlockConfig } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
   const childElements = [
@@ -11,6 +12,9 @@ export default async function decorate(block) {
     { key: 'saleName', className: 'deals-sale-name' },
     { key: 'showDisclaimers', className: 'deals-show-disclaimers' },
   ];
+
+  const config = readBlockConfig(block);
+  console.log(config);
 
   const blockUtils = new BlockUtils(block, childElements);
   blockUtils.removeUtilityElements(['showDealImages', 'showDisclaimers', 'saleName', 'fromPort', 'travelClass', 'toPorts', 'title']);
