@@ -13,7 +13,7 @@ export default async function decorate(block) {
     { key: 'showDisclaimers', className: 'deals-show-disclaimers' },
   ];
 
-  const config = readBlockConfig(block);
+  const config = readBlockConfig(childElements.showDisclaimers);
   console.log(config);
 
   const blockUtils = new BlockUtils(block, childElements);
