@@ -337,7 +337,8 @@
         "component": "boolean",
         "label": "Show Deal Images",
         "name": "showDealImages",
-        "valueType": "boolean"
+        "valueType": "boolean",
+        "key-value": true
       },
       {
         "component": "text",
