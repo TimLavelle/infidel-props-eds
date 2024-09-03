@@ -19,6 +19,8 @@ module.exports = {
     'linebreak-style': ['error', 'unix'], // enforce unix linebreaks
     'no-param-reassign': [2, { props: false }], // allow modifying properties of param
     'no-console': 'off',
-    'json/*': ['error', { 'max-cells': 200 }], // allow more than 4 cells in a json block
+    'xwalk/max-cells': ['error', {
+      '*': 10,
+    }],
   },
 };
