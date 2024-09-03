@@ -24,7 +24,13 @@ export default async function decorate(block) {
   }, {});
 
   const config = readBlockConfig(block);
-  console.log(config);
+  const blockConfig = Object.fromEntries(
+    [...block.querySelectorAll(':scope > div')].map(row => [
+      row.children[0].textContent.trim().toLowerCase(),
+      row.children[1].textContent.trim()
+    ])
+  );
+  console.log(blockConfig);
 
   const createDealsAPIParams = (fromPort) => {
     const destinationParams = params.toPorts?.split(',')
