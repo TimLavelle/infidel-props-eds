@@ -613,7 +613,8 @@
         "component": "boolean",
         "label": "Show Disclaimers",
         "name": "showDisclaimers",
-        "valueType": "boolean"
+        "valueType": "boolean",
+        "key-value": true
       }
     ]
   }

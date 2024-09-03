@@ -13,9 +13,6 @@ export default async function decorate(block) {
     { key: 'showDisclaimers', className: 'deals-show-disclaimers' },
   ];
 
-  const config = readBlockConfig(childElements.showDisclaimers);
-  console.log(config);
-
   const blockUtils = new BlockUtils(block, childElements);
   blockUtils.removeUtilityElements(['showDealImages', 'showDisclaimers', 'saleName', 'fromPort', 'travelClass', 'toPorts', 'title']);
 
@@ -25,6 +22,9 @@ export default async function decorate(block) {
     if (value) acc[key] = value;
     return acc;
   }, {});
+
+  const config = readBlockConfig(params.showDisclaimers);
+  console.log(config);
 
   const createDealsAPIParams = (fromPort) => {
     const destinationParams = params.toPorts?.split(',')
