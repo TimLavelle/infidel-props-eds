@@ -23,7 +23,7 @@ export default async function decorate(block) {
     return acc;
   }, {});
 
-  const config = readBlockConfig(params.showDisclaimers);
+  const config = readBlockConfig(block);
   console.log(config);
 
   const createDealsAPIParams = (fromPort) => {
