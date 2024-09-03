@@ -1,6 +1,5 @@
 import BlockUtils from '../../utils/blockUtils.js';
 import { fetchAuPorts, fetchAndUpdateDeals } from '../../utils/dealUtils.js';
-import { readBlockConfig } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
   const childElements = [
@@ -22,16 +21,6 @@ export default async function decorate(block) {
     if (value) acc[key] = value;
     return acc;
   }, {});
-
-  const config = readBlockConfig(block);
-  const blockConfig = Object.fromEntries(
-    [...config.querySelectorAll(':scope > div')].map((row) => [
-      row.children[0].textContent.trim().toLowerCase(),
-      row.children[1].textContent.trim(),
-    ]),
-  );
-
-  console.log(blockConfig);
 
   const createDealsAPIParams = (fromPort) => {
     const destinationParams = params.toPorts?.split(',')
