@@ -25,11 +25,12 @@ export default async function decorate(block) {
 
   const config = readBlockConfig(block);
   const blockConfig = Object.fromEntries(
-    [...block.querySelectorAll(':scope > div')].map(row => [
+    [...config.querySelectorAll(':scope > div')].map((row) => [
       row.children[0].textContent.trim().toLowerCase(),
-      row.children[1].textContent.trim()
-    ])
+      row.children[1].textContent.trim(),
+    ]),
   );
+
   console.log(blockConfig);
 
   const createDealsAPIParams = (fromPort) => {
