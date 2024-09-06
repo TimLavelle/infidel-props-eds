@@ -2,7 +2,7 @@ const dealsAPI = 'https://www.qantas.com/api/flightOffers/v2/offers';
 const flightImage = 'https://tims-personal-stuff.s3.ap-southeast-2.amazonaws.com/poolside-beach-chairs-jamaica.jpg';
 
 export async function fetchAuPorts() {
-  const response = await fetch('../../utils/resources/auPorts.json');
+  const response = await fetch('./resources/auPorts.json');
   return response.json();
 }
 
