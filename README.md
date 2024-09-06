@@ -1,4 +1,4 @@
-![Build](https://github.com/TimLavelle/infidel-props-eds/actions/workflows/main.yml/badge.svg)
+![Build](https://github.com/TimLavelle/infidel-props-eds/actions/workflows/main.yaml/badge.svg)
 # Infidel Props Sandbox Edge Delivery Site
 My 3D printing playground and my ~~EDS~~ Edge Delivery Service Site
 
