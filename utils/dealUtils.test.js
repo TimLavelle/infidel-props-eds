@@ -1,5 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { fetchAuPorts, createDealElement, updateDeals, fetchAndUpdateDeals } from './dealUtils';
+import {
+  describe, it, expect, vi, beforeEach,
+} from 'vitest';
+
+import {
+  fetchAuPorts, createDealElement, updateDeals, fetchAndUpdateDeals,
+} from './dealUtils.js';
 
 // Mock fetch globally
 global.fetch = vi.fn();
