@@ -3,4 +3,4 @@
 
 npm run lint
 
-#node .husky/pre-commit.mjs
+#node .husky/pre-commit.mj
