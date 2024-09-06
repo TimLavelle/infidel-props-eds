@@ -1,1 +1,6 @@
-node .husky/pre-commit.mjs
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run lint
+
+#node .husky/pre-commit.mjs
