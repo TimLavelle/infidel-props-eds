@@ -1,5 +1,5 @@
-# Your Project's Title...
-Your project's description...
+# Infidel Props Sandbox Edge Delivery Site
+My 3D printing playground and my ~~EDS~~ Edge Delivery Service Site
 
 ## Environments
 - Preview: https://main--{repo}--{owner}.hlx.page/
@@ -16,6 +16,24 @@ npm i
 ```sh
 npm run lint
 ```
+
+## Testing with Vitest
+Testing framework used is [Vitest](https://vitest.dev/). A JEST comparison but with faster runs and a UI test framework built in.
+```sh
+# To run a single test and stop post testing
+npm run test:run
+
+# To run all tests and watch for changes
+npm run test:watch
+```
+
+### Pre-Commits
+
+All CS/JS/JSON files are linted before committing to ensure clean and quality code.
+
+### Pre-Push
+
+All test are ran before a push to ensure all new code is tested and up to standard.
 
 ## Local development
 
