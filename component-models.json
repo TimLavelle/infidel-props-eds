@@ -615,6 +615,9 @@
         "name": "showDisclaimers",
         "valueType": "boolean",
         "key-value": true
+      },
+      {
+        "...": "./models/_button.json#/models/fields"
       }
     ]
   }
