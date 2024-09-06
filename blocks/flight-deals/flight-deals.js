@@ -7,8 +7,8 @@ export default async function decorate(block) {
     { key: 'showDealImages', className: 'deals-show-deal-images' },
     { key: 'fromPort', className: 'deals-from-port' },
     { key: 'toPorts', className: 'deals-to-ports' },
-    { key: 'travelClass', className: 'deals-travel-class' },
-    { key: 'saleName', className: 'deals-sale-name' }
+    { key: 'travelClass', className: 'deals-travel-class' }
+    { key: 'saleName', className: 'deals-sale-name' },
     { key: 'showDisclaimers', className: 'deals-show-disclaimers' },
   ];
 
