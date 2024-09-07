@@ -76,7 +76,7 @@ describe('Flight Deals Block', () => {
         toPorts: 'MEL,BNE',
         travelClass: 'ECONOMY',
         showDisclaimers: 'true',
-        saleName: 'Summer Sale,Winter Deal'
+        saleName: 'Summer Sale,Winter Deal',
       };
 
       BlockUtils.mockImplementation(() => ({
@@ -90,7 +90,7 @@ describe('Flight Deals Block', () => {
       expect(fetchAndUpdateDeals).toHaveBeenCalledWith(
         expect.stringContaining(expectedURL),
         expect.any(HTMLElement),
-        expect.any(Object)
+        expect.any(Object),
       );
     });
 
@@ -98,7 +98,7 @@ describe('Flight Deals Block', () => {
       const mockBlock = document.createElement('div');
       const params = {
         fromPort: 'MEL',
-        showDisclaimers: 'false'
+        showDisclaimers: 'false',
       };
 
       BlockUtils.mockImplementation(() => ({
@@ -112,7 +112,7 @@ describe('Flight Deals Block', () => {
       expect(fetchAndUpdateDeals).toHaveBeenCalledWith(
         expect.stringContaining(expectedURL),
         expect.any(HTMLElement),
-        expect.any(Object)
+        expect.any(Object),
       );
     });
   });
