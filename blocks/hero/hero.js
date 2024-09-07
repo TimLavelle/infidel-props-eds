@@ -7,7 +7,7 @@ export default async function decorate(block) {
   const heroLCPBlocks = ['hero'];
 
   // Call loadEager with the specific LCP blocks
-  await loadEager(document, heroLCPBlocks);
+  await loadEager(block, heroLCPBlocks);
 
   // Rest of your block logic
 }
