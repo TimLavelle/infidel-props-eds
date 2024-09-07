@@ -24,7 +24,7 @@ describe('Deal Utilities Functions', () => {
 
       const result = await fetchAuPorts();
       expect(result).toEqual(mockData);
-      expect(global.fetch).toHaveBeenCalledWith('./resources/auPorts.json');
+      expect(global.fetch).toHaveBeenCalledWith('../utils/resources/auPorts.json');
     });
   });
 
