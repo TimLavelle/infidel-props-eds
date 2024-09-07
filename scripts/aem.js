@@ -740,6 +740,14 @@ async function waitForLCP(lcpBlocks) {
 
   document.body.style.display = null;
   const lcpCandidate = document.querySelector('main img');
+  if (lcpCandidate && lcpCandidate.src) {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.fetchPriority = 'high';
+    link.href = lcpCandidate.src;
+    document.head.appendChild(link);
+  }
 
   await new Promise((resolve) => {
     if (lcpCandidate && !lcpCandidate.complete) {
