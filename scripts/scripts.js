@@ -91,7 +91,7 @@ export function decorateMain(main) {
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
-/* TODO: see if we can pass a lcp param to this function to make it more dynamic and if can be page specific */
+/* TODO: see if we can pass a lcp param to this function to make it more dynamic */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
