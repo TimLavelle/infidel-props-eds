@@ -12,7 +12,7 @@ import {
   loadCSS,
 } from './aem.js';
 
-// const LCP_BLOCKS = []; // add your LCP blocks to the list
+const LCP_BLOCKS = []; // add your LCP blocks to the list
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -92,36 +92,24 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 /* TODO: see if we can pass a lcp param to this function to make it more dynamic */
-export async function loadEager(doc, lcpBlocks = []) {
-  console.log('loadEager started', { doc, lcpBlocks });
+async function loadEager(doc) {
   document.documentElement.lang = 'en';
-  console.log('Language set to en');
   decorateTemplateAndTheme();
-  console.log('Template and theme decorated');
   const main = doc.querySelector('main');
-  console.log('Main element:', main);
   if (main) {
     decorateMain(main);
-    console.log('Main element decorated');
     document.body.classList.add('appear');
-    console.log('Added "appear" class to body');
-    console.log('Waiting for LCP with blocks:', lcpBlocks);
-    await waitForLCP(lcpBlocks);
-    console.log('LCP completed');
+    await waitForLCP(LCP_BLOCKS);
   }
 
   try {
     /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
-    const shouldLoadFonts = window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded');
-    console.log('Should load fonts:', shouldLoadFonts, { windowWidth: window.innerWidth, fontsLoaded: sessionStorage.getItem('fonts-loaded') });
-    if (shouldLoadFonts) {
-      await loadFonts();
-      console.log('Fonts loaded');
+    if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) {
+      loadFonts();
     }
   } catch (e) {
-    console.error('Error loading fonts:', e);
+    // do nothing
   }
-  console.log('loadEager completed');
 }
 
 /**
@@ -159,7 +147,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
-  // loadEager will be called from individual block files
+  await loadEager(document);
   await loadLazy(document);
   loadDelayed();
 }

@@ -1,7 +1,7 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import { moveInstrumentation, loadEager } from '../../scripts/scripts.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
-export default async function decorate(block) {
+export default function decorate(block) {
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
@@ -21,10 +21,4 @@ export default async function decorate(block) {
   });
   block.textContent = '';
   block.append(ul);
-
-  // Define LCP blocks for this specific block
-  const cardsLCPBlocks = ['cards'];
-
-  // Call loadEager with the specific LCP blocks
-  await loadEager(document, cardsLCPBlocks);
 }
