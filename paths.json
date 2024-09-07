@@ -3,6 +3,6 @@
     "/content/infidel-props/:/",
     "/content/infidel-props/icons/:/icons/",
     "/content/aem-boilerplate/configuration:/.helix/config.json",
-    "/content/infidel-props/utils/resources/:/utils/resources/"
+    "/content/infidel-props/utils/resources/:/auPorts.json"
   ]
 }
