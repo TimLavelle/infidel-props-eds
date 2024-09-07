@@ -67,4 +67,53 @@ describe('Flight Deals Block', () => {
       expect(mockBlock.children.length).toBeLessThan(initialChildCount);
     });
   });
+
+  describe('createDealsAPIParams function', () => {
+    it.concurrent('should construct a properly formatted URL with all parameters', async () => {
+      const mockBlock = document.createElement('div');
+      const params = {
+        fromPort: 'SYD',
+        toPorts: 'MEL,BNE',
+        travelClass: 'ECONOMY',
+        showDisclaimers: 'true',
+        saleName: 'Summer Sale,Winter Deal'
+      };
+
+      BlockUtils.mockImplementation(() => ({
+        removeUtilityElements: vi.fn(),
+        getTrimmedContent: (key) => params[key],
+      }));
+
+      await decorate(mockBlock);
+
+      const expectedURL = '?departureAirport=SYD&includeDisclaimers=true&saleName=Summer Sale&saleName=Winter Deal&destination=MEL:ECONOMY&destination=BNE:ECONOMY';
+      expect(fetchAndUpdateDeals).toHaveBeenCalledWith(
+        expect.stringContaining(expectedURL),
+        expect.any(HTMLElement),
+        expect.any(Object)
+      );
+    });
+
+    it.concurrent('should construct a properly formatted URL with missing parameters', async () => {
+      const mockBlock = document.createElement('div');
+      const params = {
+        fromPort: 'MEL',
+        showDisclaimers: 'false'
+      };
+
+      BlockUtils.mockImplementation(() => ({
+        removeUtilityElements: vi.fn(),
+        getTrimmedContent: (key) => params[key],
+      }));
+
+      await decorate(mockBlock);
+
+      const expectedURL = '?departureAirport=MEL&includeDisclaimers=false';
+      expect(fetchAndUpdateDeals).toHaveBeenCalledWith(
+        expect.stringContaining(expectedURL),
+        expect.any(HTMLElement),
+        expect.any(Object)
+      );
+    });
+  });
 });
