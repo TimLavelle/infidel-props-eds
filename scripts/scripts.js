@@ -93,23 +93,35 @@ export function decorateMain(main) {
  */
 /* TODO: see if we can pass a lcp param to this function to make it more dynamic */
 export async function loadEager(doc, lcpBlocks = []) {
+  console.log('loadEager started', { doc, lcpBlocks });
   document.documentElement.lang = 'en';
+  console.log('Language set to en');
   decorateTemplateAndTheme();
+  console.log('Template and theme decorated');
   const main = doc.querySelector('main');
+  console.log('Main element:', main);
   if (main) {
     decorateMain(main);
+    console.log('Main element decorated');
     document.body.classList.add('appear');
+    console.log('Added "appear" class to body');
+    console.log('Waiting for LCP with blocks:', lcpBlocks);
     await waitForLCP(lcpBlocks);
+    console.log('LCP completed');
   }
 
   try {
     /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
-    if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) {
-      loadFonts();
+    const shouldLoadFonts = window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded');
+    console.log('Should load fonts:', shouldLoadFonts, { windowWidth: window.innerWidth, fontsLoaded: sessionStorage.getItem('fonts-loaded') });
+    if (shouldLoadFonts) {
+      await loadFonts();
+      console.log('Fonts loaded');
     }
   } catch (e) {
-    // do nothing
+    console.error('Error loading fonts:', e);
   }
+  console.log('loadEager completed');
 }
 
 /**
