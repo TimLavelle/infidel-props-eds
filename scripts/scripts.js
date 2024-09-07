@@ -12,7 +12,7 @@ import {
   loadCSS,
 } from './aem.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+// const LCP_BLOCKS = []; // add your LCP blocks to the list
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -92,14 +92,14 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 /* TODO: see if we can pass a lcp param to this function to make it more dynamic */
-async function loadEager(doc) {
+export async function loadEager(doc, lcpBlocks = []) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
-    await waitForLCP(LCP_BLOCKS);
+    await waitForLCP(lcpBlocks);
   }
 
   try {
@@ -147,7 +147,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
-  await loadEager(document);
+  // loadEager will be called from individual block files
   await loadLazy(document);
   loadDelayed();
 }
