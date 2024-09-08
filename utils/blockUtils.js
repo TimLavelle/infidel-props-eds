@@ -32,6 +32,8 @@ export default class BlockUtils {
   /* Get the trimmed content of a child element */
   getTrimmedContent(key) {
     const trimmedItem = this.childElements.find((item) => item.key === key);
-    return trimmedItem && trimmedItem.blockItem ? trimmedItem.blockItem.textContent.trim() : null;
+    return trimmedItem && trimmedItem.blockItem
+      ? trimmedItem.blockItem.textContent.trim()
+      : null;
   }
 }

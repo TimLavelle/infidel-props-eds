@@ -1,0 +1,13 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+.husky
+.gitignore
+.eslintignore
+.eslintrc.json
+.prettierignore
+.prettierrc.json
+.vscode
+.vite
+.eslintrc.js

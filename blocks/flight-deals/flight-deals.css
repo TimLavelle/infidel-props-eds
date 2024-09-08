@@ -17,7 +17,7 @@
   outline: 2px solid var(--focus-color);
   outline-offset: 2px;
 }
-  
+
 .dropdown-container ul {
   display: none;
   position: absolute;
@@ -34,11 +34,11 @@
 
 .dropdown-container li {
   cursor: pointer;
-  font-size: .75rem;
+  font-size: 0.75rem;
   background-color: #f9f9f9;
   border-bottom: 1px solid #d9d9d9;
   border-right: 1px solid #d9d9d9;
-  padding: .875rem 1rem;
+  padding: 0.875rem 1rem;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
@@ -63,14 +63,14 @@
 }
 
 @media (width <= 899px) {
-    .flight-deals .deals-container li {
+  .flight-deals .deals-container li {
     flex: 1 1 calc(33.33% - 1rem);
     max-width: calc(33.33% - 1rem);
   }
 }
 
 @media (width <= 599px) {
-    .flight-deals .deals-container li {
+  .flight-deals .deals-container li {
     flex: 1 1 100%;
     max-width: 100%;
   }
@@ -78,7 +78,7 @@
 
 /* Flex grid layout for desktop */
 @media (width > 900px) {
-    .flight-deals .deals-container ul {
+  .flight-deals .deals-container ul {
     justify-content: flex-start;
   }
 
@@ -124,7 +124,7 @@
 /* Accessibility: Increase font size for better readability */
 .flight-type {
   color: #323232;
-  font-size: .875rem; /* Increased from .75rem */
+  font-size: 0.875rem; /* Increased from .75rem */
   font-weight: 400;
   text-align: right;
   margin: 0;
@@ -163,34 +163,35 @@
 }
 
 .dropdown-container {
-    position: relative;
-    width: 200px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .dropdown-container label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .dropdown-containerbutton {
-    width: 100%;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    text-align: left;
-    cursor: pointer;
-  }
-  
-  .dropdown-container.dropdown-arrow {
-    float: right;
-  }
-  
-  .dropdown-container li:hover, .dropdown-container li:focus {
-    background-color: #fff;
-    font-weight: 600;
-  }
-  
-  .dropdown-container li[aria-selected="true"] {
-    background-color: #e0e0e0;
-  }
+  position: relative;
+  width: 200px;
+  font-family: Arial, sans-serif;
+}
+
+.dropdown-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.dropdown-containerbutton {
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdown-container.dropdown-arrow {
+  float: right;
+}
+
+.dropdown-container li:hover,
+.dropdown-container li:focus {
+  background-color: #fff;
+  font-weight: 600;
+}
+
+.dropdown-container li[aria-selected="true"] {
+  background-color: #e0e0e0;
+}

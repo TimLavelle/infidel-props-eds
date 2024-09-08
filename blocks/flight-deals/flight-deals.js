@@ -1,22 +1,37 @@
-import BlockUtils from '../../utils/blockUtils.js';
-import { fetchAuPorts, fetchAndUpdateDeals } from '../../utils/dealUtils.js';
+import BlockUtils from "../../utils/blockUtils.js";
+import { fetchAuPorts, fetchAndUpdateDeals } from "../../utils/dealUtils.js";
 // import { loadEager } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const childElements = [
-    { key: 'title', className: 'deals-title' },
-    { key: 'showDealImages', className: 'deals-show-deal-images' },
-    { key: 'fromPort', className: 'deals-from-port' },
-    { key: 'toPorts', className: 'deals-to-ports' },
-    { key: 'travelClass', className: 'deals-travel-class' },
-    { key: 'saleName', className: 'deals-sale-name' },
-    { key: 'showDisclaimers', className: 'deals-show-disclaimers' },
+    { key: "title", className: "deals-title" },
+    { key: "showDealImages", className: "deals-show-deal-images" },
+    { key: "fromPort", className: "deals-from-port" },
+    { key: "toPorts", className: "deals-to-ports" },
+    { key: "travelClass", className: "deals-travel-class" },
+    { key: "saleName", className: "deals-sale-name" },
+    { key: "showDisclaimers", className: "deals-show-disclaimers" },
   ];
 
   const blockUtils = new BlockUtils(block, childElements);
-  blockUtils.removeUtilityElements(['showDealImages', 'showDisclaimers', 'saleName', 'fromPort', 'travelClass', 'toPorts']);
+  blockUtils.removeUtilityElements([
+    "showDealImages",
+    "showDisclaimers",
+    "saleName",
+    "fromPort",
+    "travelClass",
+    "toPorts",
+  ]);
 
-  const fields = ['fromPort', 'showDisclaimers', 'saleName', 'toPorts', 'travelClass', 'showDealImages', 'title'];
+  const fields = [
+    "fromPort",
+    "showDisclaimers",
+    "saleName",
+    "toPorts",
+    "travelClass",
+    "showDealImages",
+    "title",
+  ];
   const params = fields.reduce((acc, key) => {
     const value = blockUtils.getTrimmedContent(key);
     if (value) acc[key] = value;
@@ -24,18 +39,22 @@ export default async function decorate(block) {
   }, {});
 
   const createDealsAPIParams = (fromPort) => {
-    const destinationParams = params.toPorts?.split(',')
-      .map((toPort) => `&destination=${toPort.trim()}:${params.travelClass}`)
-      .join('') || '';
-    const saleNameParams = params.saleName?.split(',')
-      .map((sale) => `&saleName=${sale.trim()}`)
-      .join('') || '';
+    const destinationParams =
+      params.toPorts
+        ?.split(",")
+        .map((toPort) => `&destination=${toPort.trim()}:${params.travelClass}`)
+        .join("") || "";
+    const saleNameParams =
+      params.saleName
+        ?.split(",")
+        .map((sale) => `&saleName=${sale.trim()}`)
+        .join("") || "";
     return `?departureAirport=${fromPort}&includeDisclaimers=${params.showDisclaimers}${saleNameParams}${destinationParams}`;
   };
 
   const auPorts = await fetchAuPorts();
-  const titleElement = document.createElement('div');
-  titleElement.className = 'deals-title-container dropdown-container';
+  const titleElement = document.createElement("div");
+  titleElement.className = "deals-title-container dropdown-container";
 
   const selectedPort = auPorts.flightDeals.model.departures.find(
     (port) => port.cityCode === params.fromPort,
@@ -44,50 +63,54 @@ export default async function decorate(block) {
   titleElement.innerHTML = `
     <label for="destination-button" class="deals-title">${params.title}</label>
     <button id="destination-button" aria-haspopup="listbox" aria-expanded="false">
-      ${selectedPort ? selectedPort.cityName : 'Select a city'}
+      ${selectedPort ? selectedPort.cityName : "Select a city"}
       <span class="dropdown-arrow" aria-hidden="true">▼</span>
     </button>
     <ul id="destination-listbox" role="listbox" aria-label="Destination list"></ul>
   `;
 
-  const listbox = titleElement.querySelector('#destination-listbox');
-  const button = titleElement.querySelector('#destination-button');
+  const listbox = titleElement.querySelector("#destination-listbox");
+  const button = titleElement.querySelector("#destination-button");
 
   const populateListbox = () => {
-    listbox.innerHTML = auPorts.flightDeals.model.departures.map((port) => `
+    listbox.innerHTML = auPorts.flightDeals.model.departures
+      .map(
+        (port) => `
       <li role="option" tabindex="-1" data-value="${port.cityCode}">${port.cityName}</li>
-    `).join('');
+    `,
+      )
+      .join("");
   };
 
   const toggleDropdown = () => {
-    const expanded = button.getAttribute('aria-expanded') === 'true';
-    button.setAttribute('aria-expanded', !expanded);
-    listbox.style.display = expanded ? 'none' : 'block';
-    if (!expanded) listbox.querySelector('li').focus();
+    const expanded = button.getAttribute("aria-expanded") === "true";
+    button.setAttribute("aria-expanded", !expanded);
+    listbox.style.display = expanded ? "none" : "block";
+    if (!expanded) listbox.querySelector("li").focus();
   };
 
   const closeDropdown = () => {
-    button.setAttribute('aria-expanded', 'false');
-    listbox.style.display = 'none';
+    button.setAttribute("aria-expanded", "false");
+    listbox.style.display = "none";
   };
 
   const handleButtonKeydown = (event) => {
-    if (['ArrowDown', 'Enter', ' '].includes(event.key)) {
+    if (["ArrowDown", "Enter", " "].includes(event.key)) {
       event.preventDefault();
       toggleDropdown();
-    } else if (event.key === 'Escape') {
+    } else if (event.key === "Escape") {
       closeDropdown();
     }
   };
 
   const attachEventListeners = () => {
-    button.addEventListener('click', toggleDropdown);
-    button.addEventListener('keydown', handleButtonKeydown);
+    button.addEventListener("click", toggleDropdown);
+    button.addEventListener("keydown", handleButtonKeydown);
 
-    listbox.querySelectorAll('li').forEach((option) => {
+    listbox.querySelectorAll("li").forEach((option) => {
       /* eslint-disable no-use-before-define */
-      option.addEventListener('click', () => selectOption(option));
-      option.addEventListener('keydown', handleOptionKeydown);
+      option.addEventListener("click", () => selectOption(option));
+      option.addEventListener("keydown", handleOptionKeydown);
       /* eslint-enable no-use-before-define */
     });
   };
@@ -99,7 +122,11 @@ export default async function decorate(block) {
     closeDropdown();
 
     params.fromPort = selectedCityCode;
-    await fetchAndUpdateDeals(createDealsAPIParams(selectedCityCode), block, params);
+    await fetchAndUpdateDeals(
+      createDealsAPIParams(selectedCityCode),
+      block,
+      params,
+    );
 
     populateListbox();
     attachEventListeners();
@@ -109,22 +136,26 @@ export default async function decorate(block) {
     const options = [...listbox.children];
     const currentIndex = options.indexOf(event.target);
     switch (event.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         event.preventDefault();
-        if (currentIndex < options.length - 1) options[currentIndex + 1].focus();
+        if (currentIndex < options.length - 1)
+          options[currentIndex + 1].focus();
         break;
-      case 'ArrowUp':
+      case "ArrowUp":
         event.preventDefault();
         if (currentIndex > 0) options[currentIndex - 1].focus();
-        else { button.focus(); closeDropdown(); }
+        else {
+          button.focus();
+          closeDropdown();
+        }
         break;
-      case 'Enter':
-      case ' ':
+      case "Enter":
+      case " ":
         event.preventDefault();
         selectOption(event.target);
         break;
-      case 'Escape':
-      case 'Tab':
+      case "Escape":
+      case "Tab":
         button.focus();
         closeDropdown();
         break;
@@ -136,7 +167,7 @@ export default async function decorate(block) {
     }
   };
 
-  document.addEventListener('click', (event) => {
+  document.addEventListener("click", (event) => {
     if (!titleElement.contains(event.target)) closeDropdown();
   });
 
@@ -145,9 +176,13 @@ export default async function decorate(block) {
 
   block.insertBefore(titleElement, block.firstChild);
 
-  const dealsContainer = document.createElement('div');
-  dealsContainer.className = 'deals-container';
+  const dealsContainer = document.createElement("div");
+  dealsContainer.className = "deals-container";
   block.appendChild(dealsContainer);
 
-  await fetchAndUpdateDeals(createDealsAPIParams(params.fromPort), dealsContainer, params);
+  await fetchAndUpdateDeals(
+    createDealsAPIParams(params.fromPort),
+    dealsContainer,
+    params,
+  );
 }

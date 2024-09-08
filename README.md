@@ -1,10 +1,19 @@
 ![Build](https://github.com/TimLavelle/infidel-props-eds/actions/workflows/main.yaml/badge.svg)
+
 # Infidel Props Sandbox Edge Delivery Site
+
 My 3D printing playground and my ~~EDS~~ Edge Delivery Service Site
 
 ## Environments
-- Preview: https://main--{repo}--{owner}.hlx.page/
-- Live: https://main--{repo}--{owner}.hlx.live/
+
+- Preview: https://main--infidel-props-eds--timlavelle.hlx.page/
+- Live: https://main--infidel-props-eds--timlavelle.hlx.live/
+
+## Recommended IDE Setup
+
+- [VS Code](https://code.visualstudio.com/)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
 ## Installation
 
@@ -19,7 +28,9 @@ npm run lint
 ```
 
 ## Testing with Vitest
+
 Testing framework used is [Vitest](https://vitest.dev/). A JEST comparison but with faster runs and a UI test framework built in.
+
 ```sh
 # To run a single test and stop post testing
 npm run test:run
@@ -52,10 +63,12 @@ All test are ran before a push to ensure all new code is tested and up to standa
 ## Resources
 
 ### Documentation
+
 - [Getting Started Guide](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/wysiwyg-authoring/edge-dev-getting-started)
 - [Creating Blocks](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/wysiwyg-authoring/create-block)
 - [Content Modelling](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/wysiwyg-authoring/content-modeling)
 - [Working with Tabular Data / Spreadsheets](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/wysiwyg-authoring/tabular-data)
 
 ### Presentations and Recordings
+
 - [Getting started with AEM Authoring and Edge Delivery Services](https://experienceleague.adobe.com/en/docs/events/experience-manager-gems-recordings/gems2024/aem-authoring-and-edge-delivery)
