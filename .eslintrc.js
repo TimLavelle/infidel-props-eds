@@ -23,6 +23,7 @@ module.exports = {
       '*': 10,
     }],
     'prettier/prettier': 'error',
+    'import/no-extraneous-dependencies': ['error', { 'devDependencies': true }],
   },
   plugins: ['prettier'],
 };
