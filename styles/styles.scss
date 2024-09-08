@@ -1,0 +1,108 @@
+@use "./sass/fonts" as *;
+@use "./sass/colours" as *;
+@use "./sass/variables" as *;
+@use "./sass/typography" as *;
+@use "./sass/buttons" as *;
+@use "./sass/breakpoints" as *;
+@use "sass:meta";
+
+body {
+  display: none;
+
+  &.appear {
+    display: block;
+  }
+}
+
+header {
+  height: $nav-height;
+}
+
+/* Card Styles */
+$card: (
+  border-radius: 4px,
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%),
+  padding: 1rem,
+  width: 100%,
+  max-width: 100%,
+  position: relative,
+  box-sizing: border-box,
+  display: flex,
+  flex-direction: column,
+);
+
+@mixin card {
+  @each $property, $value in $card {
+    @include meta.load-css($property, $value);
+  }
+}
+
+main {
+  img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+  }
+
+  .section {
+    padding: 64px 16px;
+
+    @media (width >= 600px) {
+      padding: 64px 32px;
+    }
+
+    &.light,
+    &.highlight {
+      background-color: $light-color;
+    }
+  }
+}
+
+.icon {
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+/* sections */
+@media (width >= 900px) {
+  .section > div {
+    max-width: $grid-width-l;
+    margin: auto;
+  }
+}
+
+/* Columns */
+.columns > div {
+  align-items: flex-start !important;
+}
+
+/* Keyboard focus styles */
+*:focus-visible {
+  outline: 3px solid $focus-color;
+  outline-offset: 2px;
+}
+
+/* Accessibility: Add styles for skip-to-content link */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+
+  &:focus {
+    left: 0;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    background: #fff;
+    z-index: 9999;
+  }
+}

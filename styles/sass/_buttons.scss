@@ -1,0 +1,83 @@
+@use "./fonts" as *;
+@use "./colours" as *;
+
+%interactive-element {
+  &:focus {
+    outline: 3px solid $focus-color;
+    outline-offset: 2px;
+  }
+}
+
+/* links */
+a,
+button,
+input,
+select,
+textarea {
+  @extend %interactive-element;
+}
+
+a {
+  &:any-link {
+    color: $link-color;
+    text-decoration: none;
+  }
+
+  &:hover {
+    text-decoration: underline;
+    color: $link-hover-color;
+  }
+}
+
+/* buttons */
+%button-base {
+  font-family: $body-font-family;
+  display: inline-block;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: 2px solid transparent;
+  padding: 5px 30px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+  cursor: pointer;
+  color: $background-color;
+  background-color: $link-color;
+  margin: 16px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 30px;
+}
+
+%button-styles {
+  @extend %button-base;
+
+  &:hover,
+  &:focus {
+    background-color: $link-hover-color;
+    cursor: pointer;
+  }
+
+  &.secondary {
+    background-color: transparent;
+    border: 2px solid currentcolor;
+    color: $text-color;
+  }
+}
+
+a.button:any-link,
+button {
+  @extend %button-styles;
+}
+
+button {
+  &:disabled {
+    background-color: $light-color;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: $light-color;
+    }
+  }
+}

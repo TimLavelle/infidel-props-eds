@@ -1,0 +1,64 @@
+/* links */
+a:any-link {
+  color: #05364d;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #09698e;
+}
+
+/* buttons */
+a.button:any-link,
+button {
+  font-family: "Roboto Mono", menlo, consolas, "Liberation Mono", monospace;
+  display: inline-block;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: 2px solid transparent;
+  padding: 5px 30px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  background-color: #05364d;
+  margin: 16px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 30px;
+}
+
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid #4d90fe;
+  outline-offset: 2px;
+}
+
+a.button:hover:any-link,
+button:hover, a.button:focus:any-link,
+button:focus {
+  background-color: #09698e;
+  cursor: pointer;
+}
+
+a.secondary.button:any-link,
+button.secondary {
+  background-color: transparent;
+  border: 2px solid currentcolor;
+  color: #000;
+}
+
+button:disabled {
+  background-color: #f4f5f6;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  background-color: #f4f5f6;
+}

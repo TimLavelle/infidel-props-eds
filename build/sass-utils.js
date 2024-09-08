@@ -1,17 +1,42 @@
 /* eslint-disable no-console */
 import * as sass from "sass";
 import path from "path";
-import { writeFile, readdir, watch } from "fs/promises";
+import { writeFile, readdir, watch, mkdir } from "fs/promises";
+
+const ensureDirectoryExists = async (directory) => {
+  try {
+    await mkdir(directory, { recursive: true });
+  } catch (error) {
+    if (error.code !== 'EEXIST') throw error;
+  }
+};
 
 /**
  * Compile the given sass file and write the result in a sibling .css file
  * @param {string} sassFile
  */
 export const compileFileInPlace = async (sassFile) => {
-  const dest = sassFile.replace(path.extname(sassFile), ".css");
-  const promise = writeFile(dest, sass.compile(sassFile).css);
-  console.log(`Compiled: ${sassFile} => ${dest}`);
-  return promise;
+  const compiledCss = sass.compile(sassFile).css;
+  const sassDir = path.dirname(sassFile);
+  let fileName = path.basename(sassFile).replace(path.extname(sassFile), ".css");
+
+  if (sassDir.includes(path.join('styles', 'sass'))) {
+
+    // Remove leading underscore from the filename
+    if (fileName.startsWith('_')) {
+      fileName = fileName.substring(1);
+    }
+
+    const outputDir = path.join(sassDir, '..');
+    await ensureDirectoryExists(outputDir);
+    const dest = path.join(outputDir, fileName);
+    await writeFile(dest, compiledCss);
+    console.log(`Compiled and moved: ${sassFile} => ${dest}`);
+  } else {
+    const dest = path.join(path.dirname(sassFile), fileName);
+    await writeFile(dest, compiledCss);
+    console.log(`Compiled: ${sassFile} => ${dest}`);
+  }
 };
 
 /**

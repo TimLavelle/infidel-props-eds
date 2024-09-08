@@ -22,8 +22,8 @@ module.exports = {
     'xwalk/max-cells': ['error', {
       '*': 10,
     }],
-    'prettier/prettier': 'error',
     'import/no-extraneous-dependencies': ['error', { 'devDependencies': true }],
+    'prettier/prettier': 'error',
   },
   plugins: ['prettier'],
 };
