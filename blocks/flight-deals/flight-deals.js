@@ -1,6 +1,6 @@
 import BlockUtils from "../../utils/blockUtils.js";
 import { fetchAuPorts, fetchAndUpdateDeals } from "../../utils/dealUtils.js";
-// import { loadEager } from '../../scripts/scripts.js';
+// import { loadEager } from '../../scripts/scripts.js'; removed
 
 export default async function decorate(block) {
   const childElements = [
