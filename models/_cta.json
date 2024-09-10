@@ -1,0 +1,77 @@
+{
+  "definitions": [
+    {
+      "title": "Button",
+      "id": "button",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/button/v1/button",
+            "template": {
+              "model": "button"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "cta",
+      "fields": [
+        {
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link"
+        },
+        {
+          "component": "text",
+          "name": "linkText",
+          "label": "Text"
+        },
+        {
+          "component": "text",
+          "name": "linkTitle",
+          "label": "Title"
+        },
+        {
+          "component": "select",
+          "name": "linkType",
+          "label": "Type",
+          "options": [
+            {
+              "name": "Layout",
+              "children": [
+                {
+                  "name": "Default",
+                  "value": "btn-default"
+                },
+                {
+                  "name": "Wide",
+                  "value": "btn--wide"
+                }
+              ]
+            },
+            {
+              "name": "Button",
+              "children": [
+                {
+                  "name": "Primary",
+                  "value": "btn-primary"
+                },
+                {
+                  "name": "Secondary",
+                  "value": "btn-secondary"
+                },
+                {
+                  "name": "Outline",
+                  "value": "btn-tertiary"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
