@@ -37,8 +37,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run test"
+      "pre-push": "npm run test",
+      "pre-commit": "node .husky/pre-commit.mjs"
     }
   },
   "repository": {
